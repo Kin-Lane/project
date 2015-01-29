@@ -1,7 +1,7 @@
 {
   "name": "Kin Lane - Project",
-  "description": "This is my default project API, using it to manage posts in a single API. It is a Stack Network API resource, with supporting docker container for the API.",
-  "image": "https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-project-icon.png",
+  "description": "This is my default project API, using it to manage projects via a single API. It is a Stack Network API resource, with supporting docker container for the API.",
+  "image": "https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-project.png",
   "tags": [
     "application programming interface",
     "API",
@@ -15,7 +15,7 @@
     {
       "name": "Project",
       "description": "A project API resource.",
-      "image": "https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-project-icon.png",
+      "image": "https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-project.png",
       "humanURL": "https://kin-lane.github.io/project/",
       "baseURL": "http://project.api.kinlane.com",
       "tags": [
