@@ -1,0 +1,117 @@
+---
+layout: page
+title: Resource Editor
+---
+
+<script type="text/javascript">  
+
+var $org = '{{ site.org }}';
+var $repo = '{{ site.repo }}';
+var $oauthio = '{{ site.oauthio }}';
+
+$APIConfig = {};
+$APIConfig['3Scale'] = {};
+$APIConfig['3Scale']['appid'] = "5ed48098";
+$APIConfig['3Scale']['appkey'] = "b6c8c8cba92815a6cdfe6e780bb0d2f5";
+
+login = getUrlVar('login');
+
+if(login=='1')
+	{
+
+	function callback(url){
+	    return function(){
+	        location.href=url;
+	    }
+	}  
+
+	OAuth.initialize($oauthio);
+	
+	OAuth.popup('github').done(function(result) {
+	
+	    $oAuth_Token = result.access_token;
+	        
+       	redirectURL = "https://" + $org + ".github.io/" + $repo + "/editor-resource.html?oAuth_Token=" + $oAuth_Token;       
+       	setTimeout(callback(redirectURL), 500);  	        
+		        	         
+		});                   			
+	
+   }
+   
+</script> 
+
+<style>
+
+#resource-post-table {
+	background-color:#FFF;
+	border: 1px solid #000;
+	}
+	
+#resource-post-table td {
+	height: 20px;
+	margin: 5px;
+	}	
+
+#resource-post-table td text{
+	
+	font-size: 14px;
+	margin: 5px;
+	padding: 5px;
+	
+	border:2px solid #456879;
+	border-radius:10px;
+	height: 28px;
+	
+	}
+	
+#resource-post-table td button{
+	padding: 5px;
+	padding: 5px;
+}
+
+
+	
+</style>
+
+<table cellpadding="3" cellspacing="2" width="100%" style="background-color:#CCC;">
+	<tr>
+		<td width="50%" style="padding: 5px;"><h1>Resource Editor</h1></td>
+		<td width="50%">
+			<a href="#" onclick="APISJSONSave(); return false;" id="save-resource-icon-link" title="Save The APIs.json"><img id="save-resource-icon" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-save-download-250.png" width="36" align="right" style="margin: 3px;" /></a>			
+			<a href="editor-apis-json.html?login=1"id="login-github-icon-link" title="Login w/ Github to Access"><img style="display: none;" id="login-github-icon" src="https://s3.amazonaws.com/kinlane-productions/building-blocks/bw-github.png" style="margin: 3px;" width="28" align="right" /></a>
+			<a href="#" onclick="ResourceShowme(this); return false;" id="add-resource-post-icon" title="Toggle APIs.json Editor / Viewer"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-add-circle.png" width="35" align="right" style="margin: 3px;"  /></a>			
+		</td>		
+	</tr>
+</table>
+
+<div id="jsonResourceEditor"><table cellpadding="3" cellspacing="2" border="0" width="95%" id="jsonResourceEditorTable" style="margin-left: 15px;"></table></div>
+
+<div id="jsonResourceViewer" style="display: none;"><textarea rows="10" cols="50" id="jsonResourceViewerDetails" style="width:100%; height: 350px;"></textarea></div>
+
+<script type="text/javascript">   
+
+	if($oAuth_Token!='')
+		{
+
+	    var github = new Github({
+	        token: $oAuth_Token,
+	        auth: "oauth"
+	            });
+            
+		var repo = github.getRepo($org,$repo);  
+
+	    repo.read('gh-pages', 'apis.json', function(err, res) {
+		
+		 	document.getElementById("save-resource-icon").style.display = '';
+			document.getElementById("login-github-icon").style.display = 'none';	
+										
+			});	
+																		
+		}
+	else
+		{
+		document.getElementById("save-resource-icon").style.display = 'none';
+		document.getElementById("login-github-icon").style.display = '';		
+		}
+		
+</script> 
