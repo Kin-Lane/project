@@ -3,41 +3,9 @@ layout: page
 title: APIs.json Editor
 ---
 
-<script type="text/javascript">  
-
-var $org = '{{ site.org }}';
-var $repo = '{{ site.repo }}';
-var $oauthio = '{{ site.oauthio }}';
-
-login = getUrlVar('login');
-
-if(login=='1')
-	{
-
-	function callback(url){
-	    return function(){
-	        location.href=url;
-	    }
-	}  
-
-	OAuth.initialize($oauthio);
-	
-	OAuth.popup('github').done(function(result) {
-	
-	    $oAuth_Token = result.access_token;
-	        
-       	redirectURL = 'https://' + $org + '.github.io/' + $repo + '/editor-swagger-json.html?oAuth_Token=' + $oAuth_Token;       
-       	setTimeout(callback(redirectURL), 500);  	        
-		        	         
-		});                   			
-	
-   }
-   
-</script> 
-
 <table cellpadding="1" cellspacing="1" width="100%" style="background-color:#CCC;">
 	<tr>
-		<td width="50%" style="padding: 5px;"><h1>Swagger Editor</h1></td>
+		<td width="50%" style="padding: 5px;"><h1>swagger.json editor</h1></td>
 		<td width="50%">
 			<a href="#" onclick="SwaggerQuestions(); return false;" id="questions-icon-link" title="Questions"><img id="question-icon" src="https://s3.amazonaws.com/kinlane-productions/building-blocks/bw-question-mark.png" width="39" align="right" style="margin: 3px;" /></a>
 			<a href="#" onclick="SwaggerViewEdit(this); return false;" id="apis-json-icon" title="View Raw Swagger"><img src="https://s3.amazonaws.com/kinlane-productions/building-blocks/swagger.png" width="40" align="right" style="margin: 3px;" /></a>
@@ -48,7 +16,7 @@ if(login=='1')
 	</tr>
 </table>
 
-<div id="swaggerEditor" style="display: none;"><table cellpadding="3" cellspacing="2" border="0" width="95%" id="swaggerEditorTable" style="margin-left: 15px;"></table></div>
+<div id="swaggerEditor"><table cellpadding="3" cellspacing="2" border="0" width="95%" id="swaggerEditorTable" style="margin-left: 15px;"></table></div>
 <div id="jsonViewer" style="display: none;"><textarea rows="10" cols="50" id="jsonViewerDetails" style="width:100%; height: 350px;"></textarea></div>
 
 <div id="questionsViewer" style="display: none;">
@@ -80,31 +48,3 @@ if(login=='1')
 	<p>This Swagger editor works in conjunction with the APIs.json editor, allowing for the editing of the entire API discovery layer for this Github repository, and using APIs.json includes, I can link to the other supporting projects in this stack.</p>
 	<p>This is meant to be an quicker, dirtier, Swagger editor, and UI generator that runs 100% on Github, for this particular project. The code is not meant to be clean or for production. I'm purposely making the code verbose, and for instructional purposes, allowing all aspects of this to be modified and remixed as needed..</p>
 </div>
-
-<script type="text/javascript">   
-
-	if($oAuth_Token!='')
-		{
-
-	    var github = new Github({
-	        token: $oAuth_Token,
-	        auth: "oauth"
-	            });
-            
-		var repo = github.getRepo($org,$repo);  
-
-	    repo.read('gh-pages', 'apis.json', function(err, res) {
-		
-		 	//document.getElementById("save-apisjson-icon").style.display = '';
-			//document.getElementById("login-github-icon").style.display = 'none';	
-										
-			});	
-																		
-		}
-	else
-		{
-		//document.getElementById("save-apisjson-icon").style.display = 'none';
-		//document.getElementById("login-github-icon").style.display = '';		
-		}
-	
-</script> 

@@ -28,15 +28,15 @@ function addResource(tinyInstance)
 
 	$postData = {};
 
-	$postData['appid'] = $APIConfig['3Scale']['appid'];
-	$postData['appkey'] = $APIConfig['3Scale']['appkey'];
+	$postData['appid'] = $apikeys['API Evangelist']['appid'];
+	$postData['appkey'] = $apikeys['API Evangelist']['appkey'];
 
 	$postData['name'] = $resource_name;
 	$postData['description'] = $resource_description;
 	$postData['url'] = $resource_url;
 	$postData['tags'] = $resource_tags;
 
-	$hosturl = 'http://blog.api.kinlane.com';
+	$hosturl = 'https://blog.api.kinlane.com';
 	$baseurl = '/';
 	$resource = 'blog/';
 
@@ -127,12 +127,12 @@ function deleteResource($resourcecount)
 	$resource_slug = document.getElementById("edit-resource-slug-" + $resourcecount).value;
 
 
-	$hosturl = 'http://blog.api.kinlane.com';
+	$hosturl = 'https://blog.api.kinlane.com';
 	$baseurl = '/';
 	$resource = 'blog/';
 
-	$query = '?appid=' + $APIConfig['3Scale']['appid'];
-	$query = $query + '&appkey=' + $APIConfig['3Scale']['appkey'];
+	$query = '?appid=' + $apikeys['API Evangelist']['appid'];
+	$query = $query + '&appkey=' + $apikeys['API Evangelist']['appkey'];
 
 	$apiurl = $hosturl + $baseurl + $resource + $resource_slug + '/' + $query;
 
@@ -161,8 +161,8 @@ function deleteResource($resourcecount)
 
 		$postData = {};
 
-		$postData['appid'] = $APIConfig['3Scale']['appid'];
-		$postData['appkey'] = $APIConfig['3Scale']['appkey'];
+		$postData['appid'] = $apikeys['API Evangelist']['appid'];
+		$postData['appkey'] = $apikeys['API Evangelist']['appkey'];
 
 		$postData['slug'] = $resource_slug;
 		$postData['name'] = $resource_name;
@@ -170,7 +170,7 @@ function deleteResource($resourcecount)
 		$postData['url'] = $resource_url;
 		$postData['tags'] = $resource_tags;
 
-		$hosturl = 'http://blog.api.kinlane.com';
+		$hosturl = 'https://blog.api.kinlane.com';
 		$baseurl = '/';
 		$resource = 'blog/';
 
@@ -292,12 +292,12 @@ function loadResourceEditor()
 	$textEditors = "add-resource-post";
 
 
-	$hosturl = 'http://blog.api.kinlane.com';
+	$hosturl = 'https://blog.api.kinlane.com';
 	$baseurl = '/';
 	$resource = 'blog/';
 
-	$query = '?appid=' + $APIConfig['3Scale']['appid'];
-	$query = $query + '&appkey=' + $APIConfig['3Scale']['appkey'];
+	$query = '?appid=' + $apikeys['API Evangelist']['appid'];
+	$query = $query + '&appkey=' + $apikeys['API Evangelist']['appkey'];
 
 	$apiurl = $hosturl + $baseurl + $resource + $query;
 

@@ -3,43 +3,6 @@ layout: page
 title: Resource Editor
 ---
 
-<script type="text/javascript">  
-
-var $org = '{{ site.org }}';
-var $repo = '{{ site.repo }}';
-var $oauthio = '{{ site.oauthio }}';
-
-$APIConfig = {};
-$APIConfig['3Scale'] = {};
-$APIConfig['3Scale']['appid'] = "5ed48098";
-$APIConfig['3Scale']['appkey'] = "b6c8c8cba92815a6cdfe6e780bb0d2f5";
-
-login = getUrlVar('login');
-
-if(login=='1')
-	{
-
-	function callback(url){
-	    return function(){
-	        location.href=url;
-	    }
-	}  
-
-	OAuth.initialize($oauthio);
-	
-	OAuth.popup('github').done(function(result) {
-	
-	    $oAuth_Token = result.access_token;
-	        
-       	redirectURL = "https://" + $org + ".github.io/" + $repo + "/editor-resource.html?oAuth_Token=" + $oAuth_Token;       
-       	setTimeout(callback(redirectURL), 500);  	        
-		        	         
-		});                   			
-	
-   }
-   
-</script> 
-
 <style>
 
 #resource-post-table {
@@ -87,31 +50,3 @@ if(login=='1')
 <div id="jsonResourceEditor"><table cellpadding="3" cellspacing="2" border="0" width="95%" id="jsonResourceEditorTable" style="margin-left: 15px;"></table></div>
 
 <div id="jsonResourceViewer" style="display: none;"><textarea rows="10" cols="50" id="jsonResourceViewerDetails" style="width:100%; height: 350px;"></textarea></div>
-
-<script type="text/javascript">   
-
-	if($oAuth_Token!='')
-		{
-
-	    var github = new Github({
-	        token: $oAuth_Token,
-	        auth: "oauth"
-	            });
-            
-		var repo = github.getRepo($org,$repo);  
-
-	    repo.read('gh-pages', 'apis.json', function(err, res) {
-		
-		 	document.getElementById("save-resource-icon").style.display = '';
-			document.getElementById("login-github-icon").style.display = 'none';	
-										
-			});	
-																		
-		}
-	else
-		{
-		document.getElementById("save-resource-icon").style.display = 'none';
-		document.getElementById("login-github-icon").style.display = '';		
-		}
-		
-</script> 

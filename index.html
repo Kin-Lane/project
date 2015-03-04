@@ -2,41 +2,7 @@
 layout: page
 ---
 
-<script type="text/javascript">  
-
-var $org = '{{ site.org }}';
-var $repo = '{{ site.repo }}';
-var $oauthio = '{{ site.oauthio }}';
-
-login = getUrlVar('login');
-
-if(login=='1')
-	{
-
-	function callback(url){
-	    return function(){
-	        location.href=url;
-	    }
-	}  
-
-	OAuth.initialize($oauthio);
-	
-	OAuth.popup('github').done(function(result) {
-	
-	    $oAuth_Token = result.access_token;
-	        
-       	redirectURL = "https://{{ site.org }}.github.io/{{ site.repo }}/index.html?oAuth_Token=" + $oAuth_Token;       
-       	setTimeout(callback(redirectURL), 500);  	        
-		        	         
-		});                   			
-	
-   }
-   
-//console.log('org: ' + $org);
-//console.log('repo: ' + $repo);
-   
-</script> 
-<p><a href="editor-apis-json.html?login=1"id="login-github-icon-link" title="Login w/ Github to Access"><img id="login-github-icon" src="https://s3.amazonaws.com/kinlane-productions/building-blocks/bw-github.png" width="28" align="right" style="margin: 3px;" /></a></p>
+<p><a href="index.html?login=1"id="login-github-icon-link" title="Login w/ Github to Access"><img id="login-github-icon" src="https://s3.amazonaws.com/kinlane-productions/building-blocks/bw-github.png" width="28" align="right" style="margin: 3px;" /></a></p>
 
 <div id="jsonNavigator""><table cellpadding="3" cellspacing="2" border="0" width="95%" id="jsonNavigatorTable" style="margin-left: 15px;"></table></div>
 
@@ -45,5 +11,6 @@ if(login=='1')
 	<p>This APIs.json editor mounts the default APIs.json file for this project located at /apis.json, and renders to the page for viewing, and inline editing. I've used standard icons to assist in usability.</p>
 	<p>This APIs.json editor works in conjunction with the Swagger editor, allowing for the editing of the entire API discovery layer for this Github repository, and using APIs.json includes, I can link to the other supporting projects in this stack.</p>
 	<p>This is meant to be an quicker, dirtier, Swagger editor, and UI generator that runs 100% on Github, for this particular project. The code is not meant to be clean or for production. I'm purposely making the code verbose, and for instructional purposes, allowing all aspects of this to be modified and remixed as needed..</p>
+	<p>If you are listed as collaborator on this Github organization you should be able to login using Github icon above, and get access to manage all other aspects of this micro-service.</p>
 </div>
 <p><br /></p>
