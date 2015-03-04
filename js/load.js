@@ -81,6 +81,7 @@ if($oAuth_Token!='')
 	document.getElementById("apis-json-editor-nav").style.display = '';
 	document.getElementById("master-nav").style.display = '';
 	
+	document.getElementById("login-github-icon").style.display = 'none';
 							    					    	
 	}
 else
