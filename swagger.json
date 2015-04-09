@@ -2,30 +2,65 @@
   "swagger": "2.0",
   "info": {
     "title": "Project",
-    "description": "This is a project api",
+    "description": "This is an project for all my projects. I use a single project system to manage all my sites. Based upon tagging, I then publish each post out to its respective Github Page based repo.",
     "termsOfService": "http://stack.network/terms-of-service.html",
-    "version": "v1"
+    "version": "v2"
   },
   "host": "project.api.kinlane.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "produces": [
-    "projectlication/json"
+    "application/json"
   ],
   "paths": {
-    "project/": {
+    "/project/": {
       "get": {
-        "summary": "retrieves all projects",
-        "description": "pulls all projects, with filter by keyword",
+        "summary": "all projects",
+        "description": "all projects",
         "operationId": "getProjects",
         "parameters": [
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the project",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "query",
             "in": "query",
             "description": "a text query to search across project",
-            "required": true,
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "which page of results to show",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "how many to show on page",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "which field to sort by",
+            "required": false,
             "type": "string"
           }
         ],
@@ -41,42 +76,76 @@
           }
         },
         "tags": [
-          "project",
-          "projectging"
+          "Project"
         ]
       },
       "post": {
-        "summary": "add project",
-        "description": "add a new project",
+        "summary": "add a project post",
+        "description": "add a project post",
         "operationId": "addProject",
         "parameters": [
           {
-            "name": "name",
+            "name": "appid",
             "in": "query",
-            "description": "name of the project",
+            "description": "your appid for accessing the project",
             "required": true,
             "type": "string"
           },
           {
-            "name": "description",
+            "name": "appkey",
             "in": "query",
-            "description": "description of the project",
+            "description": "your appkey for accessing the project",
             "required": true,
             "type": "string"
           },
           {
-            "name": "url",
+            "name": "title",
             "in": "query",
-            "description": "url for the project",
+            "description": "ttle for the project",
             "required": true,
             "type": "string"
           },
           {
-            "name": "tags",
+            "name": "summary",
             "in": "query",
-            "description": "tags for the project",
-            "required": true,
+            "description": "summary of the project",
+            "required": false,
             "type": "string"
+          },
+          {
+            "name": "github_repo",
+            "in": "query",
+            "description": "github repo for the project",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subdomain",
+            "in": "query",
+            "description": "subdomain for the project",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "type of the project",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "image",
+            "in": "query",
+            "description": "image for the project",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "image_width",
+            "in": "query",
+            "description": "width of the project image",
+            "required": false,
+            "type": "integer"
           }
         ],
         "responses": {
@@ -91,24 +160,153 @@
           }
         },
         "tags": [
-          "project",
-          "projectging"
+          "Project"
         ]
       }
     },
-    "project/{slug}": {
+    "/project/published/": {
+      "get": {
+        "summary": "published projects",
+        "description": "published projects",
+        "operationId": "getPublishedProjects",
+        "parameters": [
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "which page of results to show",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "how many to show on page",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "which field to sort by",
+            "required": false,
+            "type": "string"
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "Project Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/project"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Project"
+        ]
+      }
+    },
+    "/project/draft/": {
+      "get": {
+        "summary": "draft projects",
+        "description": "draft projects",
+        "operationId": "getDraftProjects",
+        "parameters": [
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "which page of results to show",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "how many to show on page",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "which field to sort by",
+            "required": false,
+            "type": "string"
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "project response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/project"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Project"
+        ]
+      }
+    },
+    "/project/{project_id}/": {
       "get": {
         "summary": "Retrieve a project using its slug",
         "description": "Returns the project detail",
         "operationId": "getProject",
         "parameters": [
           {
-            "name": "slug",
+            "name": "project_id",
             "in": "path",
-            "description": "slug for the project, notice this is in the path, not a query variable",
-            "required": "true",
+            "description": "the unique id for project entry",
+            "required": true,
             "type": "integer",
             "format": "id"
+          },
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the project",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -123,8 +321,7 @@
           }
         },
         "tags": [
-          "project",
-          "projectging"
+          "Project"
         ]
       },
       "put": {
@@ -133,39 +330,75 @@
         "operationId": "updateProject",
         "parameters": [
           {
-            "name": "slug",
+            "name": "project_id",
             "in": "path",
-            "description": "unique slug for the project",
+            "description": "the unique id for project entry",
+            "required": true,
+            "type": "integer",
+            "format": "id"
+          },
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the project",
             "required": true,
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "appkey",
             "in": "query",
-            "description": "name of the project",
+            "description": "your appkey for accessing the project",
             "required": true,
             "type": "string"
           },
           {
-            "name": "description",
+            "name": "title",
             "in": "query",
-            "description": "description of the project",
+            "description": "ttle for the project",
             "required": true,
             "type": "string"
           },
           {
-            "name": "url",
+            "name": "summary",
             "in": "query",
-            "description": "url for the project",
-            "required": true,
+            "description": "summary of the project",
+            "required": false,
             "type": "string"
           },
           {
-            "name": "tags",
+            "name": "github_repo",
             "in": "query",
-            "description": "tags for the project",
-            "required": true,
+            "description": "github repo for the project",
+            "required": false,
             "type": "string"
+          },
+          {
+            "name": "subdomain",
+            "in": "query",
+            "description": "subdomain for the project",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "type of the project",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "image",
+            "in": "query",
+            "description": "image for the project",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "image_width",
+            "in": "query",
+            "description": "width of the project image",
+            "required": false,
+            "type": "integer"
           }
         ],
         "responses": {
@@ -180,19 +413,33 @@
           }
         },
         "tags": [
-          "project",
-          "projectging"
+          "Project"
         ]
       },
       "delete": {
         "summary": "delete project",
-        "description": "deletes an project",
+        "description": "delete project",
         "operationId": "deleteProject",
         "parameters": [
           {
-            "name": "slug",
+            "name": "project_id",
             "in": "path",
-            "description": "unique slug for the project",
+            "description": "the unique id for project entry",
+            "required": true,
+            "type": "integer",
+            "format": "id"
+          },
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the project",
             "required": true,
             "type": "string"
           }
@@ -209,8 +456,278 @@
           }
         },
         "tags": [
-          "project",
-          "projectging"
+          "Project"
+        ]
+      }
+    },
+    "/project/{project_id}/tags/": {
+      "get": {
+        "summary": "project tags",
+        "description": "project tags",
+        "operationId": "getprojectTags",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "description": "id for project",
+            "required": true,
+            "type": "integer",
+            "format": "id"
+          },
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the project",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project Tags Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/tag"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tags"
+        ]
+      },
+      "post": {
+        "summary": "add tag to project",
+        "description": "add tag to project",
+        "operationId": "addProjectTag",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "description": "id for the project",
+            "required": true,
+            "type": "integer",
+            "format": "id"
+          },
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "tag name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/tag"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tags"
+        ]
+      }
+    },
+    "/project/{project_id}/tags/{tag}": {
+      "delete": {
+        "summary": "delete project tag",
+        "description": "delete project tag",
+        "operationId": "deleteprojectTag",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "description": "id for the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "tag to remove from project",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project Tag Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/tag"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tags"
+        ]
+      }
+    },
+    "/project/tags/byweek/": {
+      "get": {
+        "summary": "project tags by week",
+        "description": "project tags by week",
+        "operationId": "getProjectTagsByWeek",
+        "parameters": [
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the project",
+            "required": true,
+            "type": "string"
+          },        
+          {
+            "name": "week",
+            "in": "query",
+            "description": "the week to retrieve tags by",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "the year to retrieve tags by",
+            "required": false,
+            "type": "string"
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "Project Tag Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/project"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tags"
+        ]
+      }
+    },
+    "/project/tags/byweek/{tag}/project/": {
+      "get": {
+        "summary": "project tags by week projects",
+        "description":  "project tags by week projects",
+        "operationId": "getProjectTagCProject",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "the tag to filter by",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "week",
+            "in": "query",
+            "description": "the week to filter by, defaults to this week",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project Tag BLog Responsee",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/project"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Tags"
+        ]
+      }
+    },
+    "/project/byweek/": {
+      "get": {
+        "summary": "projects by week",
+        "description": "projects by week",
+        "operationId": "getProjectsByWeek",
+        "parameters": [
+          {
+            "name": "appid",
+            "in": "query",
+            "description": "your appid for accessing the project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appkey",
+            "in": "query",
+            "description": "your appkey for accessing the project",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project Response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/project"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Project"
         ]
       }
     }
@@ -218,42 +735,58 @@
   "definitions": {
     "project": {
       "properties": {
-        "name": {
-          "description": "name of the project",
-          "type": "string",
-          "format": "label"
+        "project_id": {
+          "description": "unique id of the project",
+          "type": "integer",
+          "format": "id"
         },
-        "description": {
-          "description": "description of the project",
+        "title": {
+          "description": "ttle for the project",
           "type": "string"
         },
-        "url": {
-          "description": "url for the project",
+        "summary": {
+          "description": "summary of the project",
           "type": "string"
         },
-        "tags": {
-          "description": "tags for the project",
+        "github_repo": {
+          "description": "github repo for the project",
           "type": "string"
         },
-        "slug": {
-          "description": "slug for the project",
-          "type": "string",
+        "subdomain": {
+          "description": "subdomain for the project",
+          "type": "string"
+        },
+        "type": {
+          "description": "type of the project",
+          "type": "integer",
+          "format": "id"
+        },
+        "image": {
+          "description": "image for the project",
+          "type": "integer",
+          "format": "id"
+        },
+        "image_width": {
+          "description": "width of the project image",
+          "type": "integer",
           "format": "id"
         }
       }
     },
-    "errorModel": {
-      "required": [
-        "code",
-        "message"
-      ],
+    "tag": {
       "properties": {
-        "code": {
+        "tag_id": {
+          "description": "id for the tag",
           "type": "integer",
-          "format": "int32"
+          "format": "id"
         },
-        "message": {
+        "tag": {
+          "description": "text tag",
           "type": "string"
+        },
+        "api_count": {
+          "description": "number of items api with tag",
+          "type": "integer"
         }
       }
     }
