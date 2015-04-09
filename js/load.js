@@ -3,7 +3,7 @@ var $login = getUrlVar('login');
 
   function deploySwagger()
   	{		
-	  var url = "http://kin-lane.github.io/" + $repo + "/swagger.json";
+	  var url = "https://kin-lane.github.io/" + $repo + "/swagger.json";
 	  
 	  window.swaggerUi = new SwaggerUi({
 	    url: url,
@@ -133,8 +133,10 @@ if($oAuth_Token!='')
 	document.getElementById("apis-json-editor-nav").style.display = '';
 	document.getElementById("master-nav").style.display = '';
 	
-	document.getElementById("login-github-icon").style.display = 'none';
-							    					    	
+	if(document.getElementById("login-github-icon"))
+		{
+		document.getElementById("login-github-icon").style.display = 'none';
+		}
 	}
 else
 	{
