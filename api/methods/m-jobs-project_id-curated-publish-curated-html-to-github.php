@@ -3,8 +3,9 @@ $route = '/jobs/:project_id/curated/publish-curated-html-to-github/';
 $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass){
 
 	$host = $_SERVER['HTTP_HOST'];
+	echo "host: " . $host . "<br />";
 	$project_id = prepareIdIn($project_id,$host);
-echo "project_ID: " . $project_id . "<br />";
+	echo "project_ID: " . $project_id . "<br />";
 	$ReturnObject = array();
 
  	$request = $app->request();
@@ -13,7 +14,7 @@ echo "project_ID: " . $project_id . "<br />";
 	//echo $project_id;
 
 	$ProjectQuery = "SELECT * FROM project WHERE Project_ID = " . $project_id;
-	echo "P)" . $ProjectQuery;
+	//echo "P)" . $ProjectQuery;
 	$ProjectResults = mysql_query($ProjectQuery) or die('Query failed: ' . mysql_error());
 	if($ProjectResults && mysql_num_rows($ProjectResults))
 		{
