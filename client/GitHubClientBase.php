@@ -9,12 +9,12 @@ abstract class GitHubClientBase
 	protected $debug = false;
 	protected $username = null;
 	protected $password = null;
-	protected $timeout = 240;
+	protected $timeout = 540;
 	protected $rateLimit = 0;
 	protected $rateLimitRemaining = 0;
 	
 	protected $page = null;
-	protected $pageSize = 100;
+	protected $pageSize = 500;
 	
 	protected $lastPage = null;
 	protected $lastUrl = null;

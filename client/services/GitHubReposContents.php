@@ -68,6 +68,26 @@ class GitHubReposContents extends GitHubService
 	 * @param $path string  (Optional) - The String name of the Commit/Branch/Tag.  Defaults to `master`.
 	 * @return GitHubReadmeContent
 	 */
+	public function createFile($owner, $repo, $path = null, $message = null, $content = null, $branch = null)
+	{
+		$data = array();
+		if(!is_null($message))
+			$data['message'] = $message;	
+		if(!is_null($content))
+			$data['content'] = $content;
+		if(!is_null($branch))
+			$data['branch'] = $branch;							
+		
+		return $this->client->request("/repos/$owner/$repo/contents/" . $path, 'PUT', $data, 201, 'GitHubReadmeContent');
+	}	
+	
+	/**
+	 * Get a file
+	 * 
+	 * @param $ref string (Optional) - The String name of the Commit/Branch/Tag.  Defaults to `master`.
+	 * @param $path string  (Optional) - The String name of the Commit/Branch/Tag.  Defaults to `master`.
+	 * @return GitHubReadmeContent
+	 */
 	public function deleteFile($owner, $repo, $path = null, $message = null, $sha = null, $branch = null)
 	{
 		$data = array();
