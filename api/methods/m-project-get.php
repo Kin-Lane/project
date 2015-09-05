@@ -63,7 +63,7 @@ $app->get($route, function ()  use ($app){
 
 		// manipulation zone
 		$host = $_SERVER['HTTP_HOST'];
-		$project_id = prepareIdOut($project_id,$hos
+		$project_id = prepareIdOut($project_id,$host);
 
 		$F = array();
 		$F['project_id'] = $project_id;
