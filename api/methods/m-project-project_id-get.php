@@ -17,11 +17,13 @@ $app->get($route, function ($project_id)  use ($app){
 		$project_id = $Database['Project_ID'];
 		$title = $Database['Title'];
 		$summary = $Database['Summary'];
+		$github_user = $Database['Github_User'];
 		$github_repo = $Database['Github_Repo'];
 		$subdomain = $Database['Subdomain'];
 		$type = $Database['Type'];
 		$image = $Database['Image'];
 		$image_width = $Database['Image_Width'];
+		$tag_exclude = $Database['Tag_Exclude'];
 
 		$F['tags'] = array();
 
@@ -53,10 +55,12 @@ $app->get($route, function ($project_id)  use ($app){
 		$F['title'] = $title;
 		$F['summary'] = $summary;
 		$F['github_repo'] = $github_repo;
+		$F['github_user'] = $github_user;
 		$F['subdomain'] = $subdomain;
 		$F['type'] = $type;
 		$F['image'] = $image;
 		$F['image_width'] = $image_width;
+		$F['tag_exclude'] = $tag_exclude;
 
 		$ReturnObject = $F;
 		}
