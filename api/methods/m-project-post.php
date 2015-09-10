@@ -16,7 +16,7 @@ $app->post($route, function () use ($app){
 	if(isset($params['image'])){ $image = mysql_real_escape_string($params['image']); } else { $image = ''; }
 	if(isset($params['image_width'])){ $image_width = mysql_real_escape_string($params['image_width']); } else { $image_width = ''; }
 
-  	$Query = "SELECT * FROM project WHERE Title = '" . $title . "' AND Author = '" . $author . "'";
+	$Query = "SELECT * FROM project WHERE Title = '" . $title . "'";
 	//echo $Query . "<br />";
 	$Database = mysql_query($Query) or die('Query failed: ' . mysql_error());
 
