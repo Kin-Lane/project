@@ -19,17 +19,17 @@ $app->post($route, function ($project_id)  use ($app){
 		if($CheckTagResults && mysql_num_rows($CheckTagResults))
 			{
 			$Tag = mysql_fetch_assoc($CheckTagResults);
-			$Tag_ID = $Tag['Tag_ID'];
+			$tag_id = $Tag['Tag_ID'];
 			}
 		else
 			{
 
-			$query = "INSERT INTO tags(Tag) VALUES('" . trim($_POST['Tag']) . "'); ";
+			$query = "INSERT INTO tags(Tag) VALUES('" . $tag . "'); ";
 			mysql_query($query) or die('Query failed: ' . mysql_error());
-			$Tag_ID = mysql_insert_id();
+			$tag_id = mysql_insert_id();
 			}
 
-		$CheckTagPivotQuery = "SELECT * FROM project_tag_pivot where Tag_ID = " . trim($Tag_ID) . " AND Project_ID = " . trim($project_id);
+		$CheckTagPivotQuery = "SELECT * FROM project_tag_pivot where Tag_ID = " . trim($tag_id) . " AND Project_ID = " . trim($project_id);
 		$CheckTagPivotResult = mysql_query($CheckTagPivotQuery) or die('Query failed: ' . mysql_error());
 
 		if($CheckTagPivotResult && mysql_num_rows($CheckTagPivotResult))
@@ -38,14 +38,14 @@ $app->post($route, function ($project_id)  use ($app){
 			}
 		else
 			{
-			$query = "INSERT INTO project_tag_pivot(Tag_ID,Project_ID) VALUES(" . $Tag_ID . "," . $project_id . "); ";
+			$query = "INSERT INTO project_tag_pivot(Tag_ID,Project_ID) VALUES(" . $tag_id . "," . $project_id . "); ";
 			mysql_query($query) or die('Query failed: ' . mysql_error());
 			}
 
 		$tag_id = prepareIdOut($tag_id,$host);
 
 		$F = array();
-		$F['tag_id'] = $Tag_ID;
+		$F['tag_id'] = $tag_id;
 		$F['tag'] = $tag;
 		$F['project_count'] = 0;
 
