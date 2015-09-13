@@ -43,7 +43,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			$page = 0;
 			$count = 0;
 			$url = "http://curated.api.kinlane.com/curated/tags/" . urlencode($thistag) . "/build/?appid=" . $appid . "&appkey=" . $appkey;
-			//echo $url . "<br />";
+			echo $url . "<br />";
 
 			$http = curl_init();
 			curl_setopt($http, CURLOPT_URL, $url);
@@ -52,6 +52,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
 
 			$output = curl_exec($http);
+			var_dump($output);
 			$http_status = curl_getinfo($http, CURLINFO_HTTP_CODE);
 			$info = curl_getinfo($http);
 
