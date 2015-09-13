@@ -1,6 +1,6 @@
 <?php
 $route = '/project/:project_id/tags/';
-$app->post($route, function ($Project_ID)  use ($app){
+$app->post($route, function ($project_id)  use ($app){
 
 	$host = $_SERVER['HTTP_HOST'];
 	$project_id = prepareIdIn($project_id,$host);
@@ -29,7 +29,7 @@ $app->post($route, function ($Project_ID)  use ($app){
 			$Tag_ID = mysql_insert_id();
 			}
 
-		$CheckTagPivotQuery = "SELECT * FROM project_tag_pivot where Tag_ID = " . trim($Tag_ID) . " AND Project_ID = " . trim($Project_ID);
+		$CheckTagPivotQuery = "SELECT * FROM project_tag_pivot where Tag_ID = " . trim($Tag_ID) . " AND Project_ID = " . trim($project_id);
 		$CheckTagPivotResult = mysql_query($CheckTagPivotQuery) or die('Query failed: ' . mysql_error());
 
 		if($CheckTagPivotResult && mysql_num_rows($CheckTagPivotResult))
@@ -38,7 +38,7 @@ $app->post($route, function ($Project_ID)  use ($app){
 			}
 		else
 			{
-			$query = "INSERT INTO project_tag_pivot(Tag_ID,Project_ID) VALUES(" . $Tag_ID . "," . $Project_ID . "); ";
+			$query = "INSERT INTO project_tag_pivot(Tag_ID,Project_ID) VALUES(" . $Tag_ID . "," . $project_id . "); ";
 			mysql_query($query) or die('Query failed: ' . mysql_error());
 			}
 
