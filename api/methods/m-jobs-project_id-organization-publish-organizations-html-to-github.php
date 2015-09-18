@@ -43,7 +43,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			//echo $thistag . "<br />";
 
 			$url = "http://organization.api.kinlane.com/organization/tags/" . urlencode($thistag) . "/?appid=" . $appid . "&appkey=" . $appkey;
-			echo $url . "<br />";
+			//echo $url . "<br />";
 
 			$http = curl_init();
 			curl_setopt($http, CURLOPT_URL, $url);
@@ -52,7 +52,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
 
 			$output = curl_exec($http);
-			echo $output;
+			//echo $output;
 			$http_status = curl_getinfo($http, CURLINFO_HTTP_CODE);
 			$info = curl_getinfo($http);
 
@@ -176,7 +176,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 					$APIQuery .= " ORDER BY a.Name";
 
-					//echo $APIQuery . "<br />";
+					echo $APIQuery . "<br />";
 					$APIResult = mysql_query($APIQuery) or die('Query failed: ' . mysql_error());
 					while ($APIRow = mysql_fetch_assoc($APIResult))
 						{
