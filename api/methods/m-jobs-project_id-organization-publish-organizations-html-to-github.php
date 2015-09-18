@@ -68,7 +68,10 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 				foreach($Organizations as $Companys)
 					{
 
+					$host = "organization.api.kinlane.com";
 					$Company_ID = $Companys['organization_id'];
+					$Company_ID = prepareIdIn($Company_ID,$host);
+
 					$Name = $Companys['name'];
 					$Details = $Companys['details'];
 					$Screenshot_URL = $Companys['photo'];
