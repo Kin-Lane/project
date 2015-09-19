@@ -314,10 +314,11 @@ function format_json($json, $html = false, $tabspaces = null)
     	return $id;
     	}
 
-      function scrub($item)
-      	{
-      	$item = strip_tags($item);
-      	$item = str_replace(chr(39),"",$item);
-      	$item = str_replace(chr(39),"",$item);
-      	}       
+function scrub($item)
+	{
+	$item = strip_tags($item);
+	$item = str_replace(chr(39),"",$item);
+	$item = str_replace(chr(39),"",$item);
+  return $item;
+	}
 ?>
