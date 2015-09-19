@@ -179,7 +179,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 					$APIQuery .= " ORDER BY a.Name";
 
-					echo $APIQuery . "<br />";
+				//	echo $APIQuery . "<br />";
 					$APIResult = mysql_query($APIQuery) or die('Query failed: ' . mysql_error());
 					while ($APIRow = mysql_fetch_assoc($APIResult))
 						{
