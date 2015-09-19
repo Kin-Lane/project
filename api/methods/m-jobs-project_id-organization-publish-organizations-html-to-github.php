@@ -32,7 +32,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 		$TagQuery .= " INNER JOIN project_tag_pivot ptp ON t.tag_id = ptp.tag_id";
 		$TagQuery .= " WHERE ptp.Project_ID = " . $project_id;
 		$TagQuery .= " ORDER BY t.tag DESC";
-		echo $TagQuery;
+	//	echo $TagQuery;
 		$TagResult = mysql_query($TagQuery) or die('Query failed: ' . mysql_error());
 
 		while ($Tag = mysql_fetch_assoc($TagResult))
