@@ -119,7 +119,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 							array_push($F[$BuildingBlockCategoryName], $N);
 							}
 
-							$row .= '</ul>' . chr(10)
+							$row .= '</ul>' . chr(10);
 							$row .= '</td>' . chr(10);
 		    			$row .= '</tr>' . chr(10);
 
