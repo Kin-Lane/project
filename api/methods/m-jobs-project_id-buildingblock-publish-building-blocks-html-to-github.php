@@ -81,12 +81,16 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 					$Stack = array();
 
     				$row = '<tr>' . chr(10);
-    				$row .= '<td align="left" valign="top">' . chr(10);
+						$row .= '<td align="left" valign="top">' . chr(10);
 
-    				$row .= '<a href="" id="home-logo-link-' . $building_block_id . '"><img src="' . $image . '" width="100" align="left" style="padding: 15px;" /></a>' . chr(10);
-    				$row .= '<a href="" id="home-name-link-' . $building_block_id . '" style="color: #000;"><strong>' . $name . '</strong></a><p>' . $about . '</p>' . chr(10);
+						if($image!='')
+							{
+							$row .= '<a href="" id="home-logo-link-' . $building_block_id . '"><img src="' . $image . '" width="100" align="left" style="padding: 15px;" /></a>' . chr(10);
+							}
 
-    				$row .= '</td>' . chr(10);
+						$row .= '<p><strong>' . $name . '</strong> - ' . $about . '</p>' . chr(10);
+
+						$row .= '</td>' . chr(10);
     				$row .= '</tr>' . chr(10);
 
 					$row .= '<tr>' . chr(10);
