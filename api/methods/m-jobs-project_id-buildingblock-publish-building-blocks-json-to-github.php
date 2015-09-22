@@ -40,7 +40,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			//echo $thistag . "<br />";
 
 			$url = "http://buildingblock.api.kinlane.com/buildingblocks/tags/" . urlencode($thistag) . "/?appid=" . $appid . "&appkey=" . $appkey;
-			//echo $url . "<br />";
+			echo $url . "<br />";
 
 			$http = curl_init();
 			curl_setopt($http, CURLOPT_URL, $url);
