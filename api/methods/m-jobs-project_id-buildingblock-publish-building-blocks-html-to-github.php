@@ -85,7 +85,11 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 						if($image!='')
 							{
-							$row .= '<a href="" id="home-logo-link-' . $building_block_id . '"><img src="' . $image . '" width="100" align="left" style="padding: 15px;" /></a>' . chr(10);
+							$row .= '<img src="' . $image . '" width="100" align="left" style="padding: 15px;" />' . chr(10);
+							}
+						else
+							{
+							$row .= '<img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-empty.png" width="100" align="left" style="padding: 15px;" />' . chr(10);
 							}
 
 						$row .= '<p><strong>' . $name . '</strong> - ' . $about . '</p>' . chr(10);
