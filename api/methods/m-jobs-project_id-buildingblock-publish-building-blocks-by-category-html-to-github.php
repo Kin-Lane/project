@@ -76,6 +76,11 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 					if(count($BuildingBlockCategory) > 0)
 						{
+
+						$row .= '<tr>' . chr(10);
+						$row .= '<td align="left" valign="top">' . chr(10);
+						$row .= '<ul>' . chr(10);
+
 						foreach($BuildingBlockCategory as $BuildingBlocks)
 							{
 
@@ -92,27 +97,32 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 							$Stack = array();
 
-		    				$row .= '<tr>' . chr(10);
-		    				$row .= '<td align="left" valign="top">' . chr(10);
+		    				//$row .= '<tr>' . chr(10);
+		    				//$row .= '<td align="left" valign="top">' . chr(10);
 
-								if($image!='')
-									{
-		    					$row .= '<img src="' . $image . '" width="100" align="left" style="padding: 15px;" />' . chr(10);
-									}
-								else
-									{
-									$row .= '<img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-empty.png" width="100" align="left" style="padding: 15px;" />' . chr(10);
-									}
+								//if($image!='')
+									//{
+		    					//$row .= '<img src="' . $image . '" width="100" align="left" style="padding: 15px;" />' . chr(10);
+									//}
+								//else
+//									{
+									//$row .= '<img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-empty.png" width="100" align="left" style="padding: 15px;" />' . chr(10);
+									//}
 
-		    				$row .= '<p><strong>' . $name . '</strong> - ' . $about . '</p>' . chr(10);
+		    				$row .= '<li><strong>' . $name . '</strong> - ' . $about . '</li>' . chr(10);
 
-		    				$row .= '</td>' . chr(10);
-		    				$row .= '</tr>' . chr(10);
+		    			//	$row .= '</td>' . chr(10);
+		    				//$row .= '</tr>' . chr(10);
 
 							$N = array();
 							$N['name'] = $name;
 							array_push($F[$BuildingBlockCategoryName], $N);
 							}
+
+							$row .= '</ul>' . chr(10)
+							$row .= '</td>' . chr(10);
+		    			$row .= '</tr>' . chr(10);
+
 						}
 
 					$ReturnHTML .= $row;
