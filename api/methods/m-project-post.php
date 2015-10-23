@@ -14,7 +14,7 @@ $app->post($route, function () use ($app){
 	if(isset($params['subdomain'])){ $subdomain = mysql_real_escape_string($params['$subdomain']); } else { $subdomain = ''; }
 	if(isset($params['type'])){ $type = mysql_real_escape_string($params['type']); } else { $type = ''; }
 	if(isset($params['image'])){ $image = mysql_real_escape_string($params['image']); } else { $image = ''; }
-	if(isset($params['image_width'])){ $image_width = mysql_real_escape_string($params['image_width']); } else { $image_width = ''; }
+	if(isset($params['image_width'])){ $image_width = mysql_real_escape_string($params['image_width']); } else { $image_width = 150; }
 
 	$Query = "SELECT * FROM project WHERE Title = '" . $title . "'";
 	//echo $Query . "<br />";
@@ -38,7 +38,7 @@ $app->post($route, function () use ($app){
 		$Query .= "'" . mysql_real_escape_string($image) . "',";
 		$Query .= mysql_real_escape_string($image_width);
 		$Query .= ")";
-		//echo $Query . "<br />";
+		//echo $Query . "<br />"; 
 		mysql_query($Query) or die('Query failed: ' . mysql_error());
 		$project_id = mysql_insert_id();
 		}
