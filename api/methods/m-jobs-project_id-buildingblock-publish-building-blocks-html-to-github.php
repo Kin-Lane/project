@@ -70,7 +70,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 					$building_block_id = $BuildingBlocks['building_block_id'];
 					$building_block_category_id = $BuildingBlocks['building_block_category_id'];
 					$name = $BuildingBlocks['name'];
-					$about = $BuildingBlocks['about'];
+					$about = strip_tags($BuildingBlocks['about']);
 					$category_id = $BuildingBlocks['category_id'];
 					$category = $BuildingBlocks['category'];
 					$image = $BuildingBlocks['image'];
