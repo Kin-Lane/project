@@ -80,7 +80,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 					$Provider_Tags = "";
 					$TagQuery = "SELECT t.Tag_ID, t.Tag FROM tags t INNER JOIN company_tag_pivot sptp ON t.Tag_ID = sptp.Tag_ID WHERE sptp.Company_ID = " . $organization_id . " ORDER BY Tag";
-					//echo $TagQuery . "<br />";
+					echo $TagQuery . "<br />";
 					$TagResult = mysql_query($TagQuery) or die('Query failed: ' . mysql_error());
 					$First = 1;
 					while ($ThisTag = mysql_fetch_assoc($TagResult))
