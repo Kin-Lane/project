@@ -64,93 +64,94 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 					$organization_id = $Companys['organization_id'];
 					$host = "organization.api.kinlane.com";
 					$organization_id = prepareIdIn($organization_id,$host);
-					echo $organization_id . "<br />";
-
-					$Name = $Companys['name'];
-					$Details = $Companys['details'];
-					$Screenshot_URL = $Companys['photo'];
-
-					$url = $Companys['url'];
-					$blog_url = $Companys['blog_url'];
-					$blog_rss_url = $Companys['blog_rss_url'];
-					$twitter_url = $Companys['twitter_url'];
-					$github_url = $Companys['github_url'];
-
-					$photo = $Companys['photo'];
-					$photo_width = $Companys['photo_width'];
-
-					$Provider_Tags = "";
-					$TagQuery = "SELECT t.Tag_ID, t.Tag FROM tags t INNER JOIN company_tag_pivot sptp ON t.Tag_ID = sptp.Tag_ID WHERE sptp.Company_ID = " . $organization_id . " ORDER BY Tag";
-					echo $TagQuery . "<br />";
-					$TagResult = mysql_query($TagQuery) or die('Query failed: ' . mysql_error());
-					$First = 1;
-					while ($ThisTag = mysql_fetch_assoc($TagResult))
+					//echo $organization_id . "<br />";
+					if(is_numeric($organization_id))
 						{
-						$Tag = $ThisTag['Tag'];
-						if($First==1){
-							$First=2;
-							$Provider_Tags .= $Tag;
+						$Name = $Companys['name'];
+						$Details = $Companys['details'];
+						$Screenshot_URL = $Companys['photo'];
+
+						$url = $Companys['url'];
+						$blog_url = $Companys['blog_url'];
+						$blog_rss_url = $Companys['blog_rss_url'];
+						$twitter_url = $Companys['twitter_url'];
+						$github_url = $Companys['github_url'];
+
+						$photo = $Companys['photo'];
+						$photo_width = $Companys['photo_width'];
+
+						$Provider_Tags = "";
+						$TagQuery = "SELECT t.Tag_ID, t.Tag FROM tags t INNER JOIN company_tag_pivot sptp ON t.Tag_ID = sptp.Tag_ID WHERE sptp.Company_ID = " . $organization_id . " ORDER BY Tag";
+						//echo $TagQuery . "<br />";
+						$TagResult = mysql_query($TagQuery) or die('Query failed: ' . mysql_error());
+						$First = 1;
+						while ($ThisTag = mysql_fetch_assoc($TagResult))
+							{
+							$Tag = $ThisTag['Tag'];
+							if($First==1){
+								$First=2;
+								$Provider_Tags .= $Tag;
+								}
+							else {
+								$Provider_Tags .= "," . $Tag;
+								}
 							}
-						else {
-							$Provider_Tags .= "," . $Tag;
+
+						$Details = strip_tags($Details);
+						$Details = str_replace("&nbsp;", "", $Details);
+
+						// APIs
+						$Stack['apis'] = array();
+						$APIQuery = "SELECT a.API_ID, a.Name, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Website' LIMIT 1) AS Website_URL, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Documentation' LIMIT 1) AS Documentation_URL FROM api a WHERE a.Company_ID = " . $organization_id;
+						//echo $APIQuery . "<br />";
+						$APIResult = mysql_query($APIQuery) or die('Query failed: ' . mysql_error());
+						while ($APIRow = mysql_fetch_assoc($APIResult))
+							{
+
+							$API_ID = $APIRow['API_ID'];
+
+							$API_Name = $APIRow['Name'];
+
+							$API_Name_Slug = PrepareFileName($API_Name);
+
+							//echo " -- API-Name " . $API_Name . "<br />";
+
+							$Website_URL = trim($APIRow['Website_URL']);
+							$Swagger_URL = trim($APIRow['Swagger_URL']);
+							$Documentation_URL = trim($APIRow['Documentation_URL']);
+
+							$APIStack = array();
+
+							$APIStack['id'] = $API_ID;
+							$APIStack['name'] = $API_Name;
+							$APIStack['website-url'] = $Website_URL;
+							$APIStack['swagger-url'] = $Swagger_URL;
+							$APIStack['documentation-url'] = $Documentation_URL;
+
+							array_push($Stack['apis'], $APIStack);
 							}
+
+							$host = $_SERVER['HTTP_HOST'];
+							$Company_ID = prepareIdOut($organization_id,$host);
+
+							$Stack = array();
+
+							$Stack['id'] = $Company_ID;
+							$Stack['name'] = $Name;
+							$Stack['summary'] = substr($Details,0,400);
+							$Stack['details'] = $Details;
+							$Stack['website'] = $url;
+							$Stack['twitter'] = $twitter_url;
+							$Stack['github'] = $github_url;
+							$Stack['blog'] = $blog_url;
+							$Stack['blogrss'] = $blog_rss_url;
+							$Stack['logo'] = $photo;
+							$Stack['logo_width'] = $photo_width;
+							$Stack['screenshot'] = $Screenshot_URL;
+							$Stack['tags'] = $Provider_Tags;
+
+							array_push($ReturnObject, $Stack);
 						}
-
-					$Details = strip_tags($Details);
-					$Details = str_replace("&nbsp;", "", $Details);
-
-					// APIs
-					$Stack['apis'] = array();
-					$APIQuery = "SELECT a.API_ID, a.Name, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Website' LIMIT 1) AS Website_URL, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Documentation' LIMIT 1) AS Documentation_URL FROM api a WHERE a.Company_ID = " . $organization_id;
-					//echo $APIQuery . "<br />";
-					$APIResult = mysql_query($APIQuery) or die('Query failed: ' . mysql_error());
-					while ($APIRow = mysql_fetch_assoc($APIResult))
-						{
-
-						$API_ID = $APIRow['API_ID'];
-
-						$API_Name = $APIRow['Name'];
-
-						$API_Name_Slug = PrepareFileName($API_Name);
-
-						//echo " -- API-Name " . $API_Name . "<br />";
-
-						$Website_URL = trim($APIRow['Website_URL']);
-						$Swagger_URL = trim($APIRow['Swagger_URL']);
-						$Documentation_URL = trim($APIRow['Documentation_URL']);
-
-						$APIStack = array();
-
-						$APIStack['id'] = $API_ID;
-						$APIStack['name'] = $API_Name;
-						$APIStack['website-url'] = $Website_URL;
-						$APIStack['swagger-url'] = $Swagger_URL;
-						$APIStack['documentation-url'] = $Documentation_URL;
-
-						array_push($Stack['apis'], $APIStack);
-						}
-
-						$host = $_SERVER['HTTP_HOST'];
-						$Company_ID = prepareIdOut($organization_id,$host);
-
-						$Stack = array();
-
-						$Stack['id'] = $Company_ID;
-						$Stack['name'] = $Name;
-						$Stack['summary'] = substr($Details,0,400);
-						$Stack['details'] = $Details;
-						$Stack['website'] = $url;
-						$Stack['twitter'] = $twitter_url;
-						$Stack['github'] = $github_url;
-						$Stack['blog'] = $blog_url;
-						$Stack['blogrss'] = $blog_rss_url;
-						$Stack['logo'] = $photo;
-						$Stack['logo_width'] = $photo_width;
-						$Stack['screenshot'] = $Screenshot_URL;
-						$Stack['tags'] = $Provider_Tags;
-
-					array_push($ReturnObject, $Stack);
-
 					}
 				}
 
