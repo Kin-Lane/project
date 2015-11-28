@@ -68,7 +68,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 					{
 
 					$Company_ID = $Companys['organization_id'];
-					$host = "http://organization.api.kinlane.com/";
+					$host = "organization.api.kinlane.com";
 					$Company_ID = prepareIdIn($Company_ID,$host);
 
 					$Name = $Companys['name'];
