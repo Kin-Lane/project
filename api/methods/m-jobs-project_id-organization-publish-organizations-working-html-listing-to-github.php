@@ -67,9 +67,9 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 				foreach($Organizations as $Companys)
 					{
 
-					$Company_ID = $Companys['organization_id'];
+					$organization_id = $Companys['organization_id'];
 					$host = "organization.api.kinlane.com";
-					$Company_ID = prepareIdIn($Company_ID,$host);
+					$organization_id = prepareIdIn($organization_id,$host);
 					if(is_numeric($organization_id))
 						{
 						$Name = $Companys['name'];
@@ -107,12 +107,12 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 	    				$row .= '<td align="center" width="50">' . chr(10);
 
-	    				$row .= '<a href="' . $url . '" id="home-logo-link-' . $Company_ID . '"><img src="' . $photo . '" width="70" align="left" style="padding: 15px;" /></a>' . chr(10);
+	    				$row .= '<a href="' . $url . '" id="home-logo-link-' . $organization_id . '"><img src="' . $photo . '" width="70" align="left" style="padding: 15px;" /></a>' . chr(10);
 
 						$row .= '</td>' . chr(10);
 						$row .= '<td align="left">' . chr(10);
 
-	    				$row .= '<a href="' . $url . '" id="home-name-link-' . $Company_ID . '" style="color: #000;"><strong>' . $Name . '</strong></a>' . chr(10);
+	    				$row .= '<a href="' . $url . '" id="home-name-link-' . $organization_id . '" style="color: #000;"><strong>' . $Name . '</strong></a>' . chr(10);
 
 	    				$row .= '</td>' . chr(10);
 
@@ -120,64 +120,64 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 	    				$row .= '<td width="50" align="center">';
 	    				if($url!='')
 	    					{
-	    					$row .= '<a href="' . $url . '" target="_blank" title="Website" id="home-icon-' . $Company_ID . '"><img id="home-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-home-icon.jpeg" width="18" align="center" /></a>' . chr(10);
+	    					$row .= '<a href="' . $url . '" target="_blank" title="Website" id="home-icon-' . $organization_id . '"><img id="home-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-home-icon.jpeg" width="18" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
 
 	    				$row .= '<td width="50" align="center">';
 	    				if($portal_url!='')
 	    					{
-	    					$row .= '<a href="' . $portal_url . '" target="_blank" title="Portal" id="portal-icon-' . $Company_ID . '"><img id="portal-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-portal-developers.jpg" width="20" align="center" /></a>' . chr(10);
+	    					$row .= '<a href="' . $portal_url . '" target="_blank" title="Portal" id="portal-icon-' . $organization_id . '"><img id="portal-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-portal-developers.jpg" width="20" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
 
 						$row .= '<td width="50" align="center">';
 						if($blog_url!='')
 							{
-	    					$row .= '<a href="' . $blog_url . '" target="_blank" title="Blog" id="blog-icon-' . $Company_ID . '"><img id="blog-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-blog-icon.png" width="18" align="center" /></a>' . chr(10);
+	    					$row .= '<a href="' . $blog_url . '" target="_blank" title="Blog" id="blog-icon-' . $organization_id . '"><img id="blog-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-blog-icon.png" width="18" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
 						$row .= '<td width="50" align="center">';
 						if($blog_rss_url!='')
 							{
-	    					$row .= '<a href="' . $blog_rss_url . '" target="_blank" title="Blog RSS" id="blogrss-icon-' . $Company_ID . '"><img id="blogrss-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-rss-icon.png" width="18" align="center" /></a>' . chr(10);
+	    					$row .= '<a href="' . $blog_rss_url . '" target="_blank" title="Blog RSS" id="blogrss-icon-' . $organization_id . '"><img id="blogrss-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-rss-icon.png" width="18" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
 						$row .= '<td width="50" align="center">';
 						if($twitter_url!='')
 							{
-	    					$row .= '<a href="' . $twitter_url . '" target="_blank" title="Twitter" id="twitter-icon-' . $Company_ID . '"><img id="twitter-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-twitter-icon.png" width="23" align="center" /></a>' . chr(10);
+	    					$row .= '<a href="' . $twitter_url . '" target="_blank" title="Twitter" id="twitter-icon-' . $organization_id . '"><img id="twitter-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-twitter-icon.png" width="23" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
 						$row .= '<td width="50" align="center">';
 						if($github_url!='')
 							{
-	    					$row .= '<a href="' . $github_url . '" target="_blank" title="Github" id="github-icon-' . $Company_ID . '"><img id="github-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-github-icon.png" width="25" align="center" /></a>' . chr(10);
+	    					$row .= '<a href="' . $github_url . '" target="_blank" title="Github" id="github-icon-' . $organization_id . '"><img id="github-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-github-icon.png" width="25" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
 						$row .= '<td width="50" align="center">';
 						if($apisjson_url!='')
 							{
-	    					$row .= '<a href="' . $apisjson_url . '" target="_blank" title="APIs.json" id="apisjson-icon-' . $Company_ID . '"><img id="apisjson-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-api-a.png" width="25" align="center" /></a>' . chr(10);
+	    					$row .= '<a href="' . $apisjson_url . '" target="_blank" title="APIs.json" id="apisjson-icon-' . $organization_id . '"><img id="apisjson-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-api-a.png" width="25" align="center" /></a>' . chr(10);
 							}
 
-						$row .= '(<a href="/ask-swagger-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask Swagger Questions" id="ask-swagger-link-' . $Company_ID . '" style="font-size: 10px;">swagger</a>)' . chr(10);
-						$row .= '(<a href="/ask-apis-json-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask APIs.json Questions" id="ask-apisjson-link-' . $Company_ID . '" style="font-size: 10px;">apis.json</a>)' . chr(10);
+						$row .= '(<a href="/ask-swagger-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask Swagger Questions" id="ask-swagger-link-' . $organization_id . '" style="font-size: 10px;">swagger</a>)' . chr(10);
+						$row .= '(<a href="/ask-apis-json-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask APIs.json Questions" id="ask-apisjson-link-' . $organization_id . '" style="font-size: 10px;">apis.json</a>)' . chr(10);
 
 						$row .= '</td>' . chr(10);
 						$row .= '<td width="50" align="center">';
 						if($sdksio_url!='')
 							{
-	    					$row .= '<a href="' . $sdksio_url . '" target="_blank" title="SDKs.io" id="sdksio-icon-' . $Company_ID . '"><img id="sdksio-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/api-evangelist/sdks-io/sdks-io-icon.png" width="25" align="center" /></a>' . chr(10);
+	    					$row .= '<a href="' . $sdksio_url . '" target="_blank" title="SDKs.io" id="sdksio-icon-' . $organization_id . '"><img id="sdksio-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/api-evangelist/sdks-io/sdks-io-icon.png" width="25" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
 						$row .= '<td width="50" align="center">';
 						if($postman_url!='')
 							{
-	    					$row .= '<a href="' . $postman_url . '" target="_blank" title="Postman Collection" id="sdksio-icon-' . $Company_ID . '"><img id="sdksio-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/building-blocks/x-postman.png" width="25" align="center" /></a>' . chr(10);
+	    					$row .= '<a href="' . $postman_url . '" target="_blank" title="Postman Collection" id="sdksio-icon-' . $organization_id . '"><img id="sdksio-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/building-blocks/x-postman.png" width="25" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
-						$row .= '<td width="150" align="center" id="github-issue-' . $Company_ID . '" style="font-size: 11px;">';
+						$row .= '<td width="150" align="center" id="github-issue-' . $organization_id . '" style="font-size: 11px;">';
 						$row .= '</td>' . chr(10);
 	    				$row .= '</tr>' . chr(10);
 
@@ -197,11 +197,11 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 						if($thistag=='API-Stack')
 							{
-							$APIQuery .= " WHERE cap.Company_ID = " . $Company_ID . " AND t.Tag LIKE '%Stack'";
+							$APIQuery .= " WHERE cap.Company_ID = " . $organization_id . " AND t.Tag LIKE '%Stack'";
 							}
 						else
 							{
-							$APIQuery .= " WHERE cap.Company_ID = " . $Company_ID . " AND t.Tag = '" . $thistag . "'";
+							$APIQuery .= " WHERE cap.Company_ID = " . $organization_id . " AND t.Tag = '" . $thistag . "'";
 							}
 
 						$APIQuery .= " ORDER BY a.Name";
