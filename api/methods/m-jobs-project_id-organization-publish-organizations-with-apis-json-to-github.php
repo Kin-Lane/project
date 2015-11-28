@@ -61,9 +61,9 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 				foreach($Organizations as $Companys)
 					{
 
-					$Company_ID = $Companys['organization_id'];
+					$organization_id = $Companys['organization_id'];
 					$host = "organization.api.kinlane.com";
-					$Company_ID = prepareIdIn($Company_ID,$host);
+					$organization_id = prepareIdIn($organization_id,$host);
 
 					$Name = $Companys['name'];
 					$Details = $Companys['details'];
@@ -79,8 +79,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 					$photo_width = $Companys['photo_width'];
 
 					$Provider_Tags = "";
-					$TagQuery = "SELECT t.Tag_ID, t.Tag FROM tags t INNER JOIN company_tag_pivot sptp ON t.Tag_ID = sptp.Tag_ID WHERE sptp.Company_ID = " . $Company_ID . " ORDER BY Tag";
-					echo $TagQuery . "<br />";
+					$TagQuery = "SELECT t.Tag_ID, t.Tag FROM tags t INNER JOIN company_tag_pivot sptp ON t.Tag_ID = sptp.Tag_ID WHERE sptp.Company_ID = " . $organization_id . " ORDER BY Tag";
+					//echo $TagQuery . "<br />";
 					$TagResult = mysql_query($TagQuery) or die('Query failed: ' . mysql_error());
 					$First = 1;
 					while ($ThisTag = mysql_fetch_assoc($TagResult))
@@ -100,8 +100,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 					// APIs
 					$Stack['apis'] = array();
-					$APIQuery = "SELECT a.API_ID, a.Name, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Website' LIMIT 1) AS Website_URL, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Documentation' LIMIT 1) AS Documentation_URL FROM api a WHERE a.Company_ID = " . $Company_ID;
-					echo $APIQuery . "<br />";
+					$APIQuery = "SELECT a.API_ID, a.Name, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Website' LIMIT 1) AS Website_URL, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Documentation' LIMIT 1) AS Documentation_URL FROM api a WHERE a.Company_ID = " . $organization_id;
+					//echo $APIQuery . "<br />";
 					$APIResult = mysql_query($APIQuery) or die('Query failed: ' . mysql_error());
 					while ($APIRow = mysql_fetch_assoc($APIResult))
 						{
@@ -130,7 +130,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 						}
 
 						$host = $_SERVER['HTTP_HOST'];
-						$Company_ID = prepareIdOut($Company_ID,$host);
+						$Company_ID = prepareIdOut($organization_id,$host);
 
 						$Stack = array();
 
