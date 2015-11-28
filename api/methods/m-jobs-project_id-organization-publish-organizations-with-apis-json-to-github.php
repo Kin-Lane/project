@@ -41,7 +41,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			//echo $thistag . "<br />";
 
 			$url = "http://organization.api.kinlane.com/organization/tags/" . urlencode($thistag) . "/?appid=" . $appid . "&appkey=" . $appkey;
-			//echo $url . "<br />";
+			echo $url . "<br />";
 
 			$http = curl_init();
 			curl_setopt($http, CURLOPT_URL, $url);
@@ -64,6 +64,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 					$organization_id = $Companys['organization_id'];
 					$host = "organization.api.kinlane.com";
 					$organization_id = prepareIdIn($organization_id,$host);
+					echo $organization_id . "<br />";
 
 					$Name = $Companys['name'];
 					$Details = $Companys['details'];
