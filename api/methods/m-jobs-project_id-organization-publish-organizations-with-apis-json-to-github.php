@@ -94,22 +94,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 					$Details = strip_tags($Details);
 					$Details = str_replace("&nbsp;", "", $Details);
 
-					$Stack = array();
-
-					$Stack['id'] = $Company_ID;
-					$Stack['name'] = $Name;
-					$Stack['summary'] = substr($Details,0,400);
-					$Stack['details'] = $Details;
-					$Stack['website'] = $url;
-					$Stack['twitter'] = $twitter_url;
-					$Stack['github'] = $github_url;
-					$Stack['blog'] = $blog_url;
-					$Stack['blogrss'] = $blog_rss_url;
-					$Stack['logo'] = $photo;
-					$Stack['logo_width'] = $photo_width;
-					$Stack['screenshot'] = $Screenshot_URL;
-					$Stack['tags'] = $Provider_Tags;
-
 					// APIs
 					$Stack['apis'] = array();
 					$APIQuery = "SELECT a.API_ID, a.Name, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Website' LIMIT 1) AS Website_URL, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL, (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Documentation' LIMIT 1) AS Documentation_URL FROM api a WHERE a.Company_ID = " . $Company_ID;
@@ -140,6 +124,25 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 						array_push($Stack['apis'], $APIStack);
 						}
+
+						$host = $_SERVER['HTTP_HOST'];
+						$Company_ID = prepareIdOut($Company_ID,$host);
+
+						$Stack = array();
+
+						$Stack['id'] = $Company_ID;
+						$Stack['name'] = $Name;
+						$Stack['summary'] = substr($Details,0,400);
+						$Stack['details'] = $Details;
+						$Stack['website'] = $url;
+						$Stack['twitter'] = $twitter_url;
+						$Stack['github'] = $github_url;
+						$Stack['blog'] = $blog_url;
+						$Stack['blogrss'] = $blog_rss_url;
+						$Stack['logo'] = $photo;
+						$Stack['logo_width'] = $photo_width;
+						$Stack['screenshot'] = $Screenshot_URL;
+						$Stack['tags'] = $Provider_Tags;
 
 					array_push($ReturnObject, $Stack);
 
