@@ -70,229 +70,230 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 					$Company_ID = $Companys['organization_id'];
 					$host = "organization.api.kinlane.com";
 					$Company_ID = prepareIdIn($Company_ID,$host);
-
-					$Name = $Companys['name'];
-					$Details = $Companys['details'];
-					$Screenshot_URL = $Companys['photo'];
-
-					$url = $Companys['url'];
-					$blog_url = $Companys['blog_url'];
-					$blog_rss_url = $Companys['blog_rss_url'];
-					$twitter_url = $Companys['twitter_url'];
-					$github_url = $Companys['github_url'];
-					$apisjson_url = $Companys['apisjson_url'];
-					$sdksio_url = $Companys['sdksio_url'];
-					$postman_url = $Companys['postman_url'];
-					$portal_url = $Companys['portal_url'];
-
-					$photo = $Companys['photo'];
-					$photo_width = $Companys['photo_width'];
-
-					$Provider_Tags = $Companys['tags'];
-
-					$Details = strip_tags($Details);
-					$Details = str_replace("&nbsp;", "", $Details);
-
-					$Stack = array();
-
-					if($toggle==1)
+					if(is_numeric($organization_id))
 						{
-    					$row = '<tr style="background-color: #E0E0E0;">' . chr(10);
-						}
-					else
-						{
-    					$row = '<tr>' . chr(10);
-						}
+						$Name = $Companys['name'];
+						$Details = $Companys['details'];
+						$Screenshot_URL = $Companys['photo'];
 
-    				$row .= '<td align="center" width="50">' . chr(10);
+						$url = $Companys['url'];
+						$blog_url = $Companys['blog_url'];
+						$blog_rss_url = $Companys['blog_rss_url'];
+						$twitter_url = $Companys['twitter_url'];
+						$github_url = $Companys['github_url'];
+						$apisjson_url = $Companys['apisjson_url'];
+						$sdksio_url = $Companys['sdksio_url'];
+						$postman_url = $Companys['postman_url'];
+						$portal_url = $Companys['portal_url'];
 
-    				$row .= '<a href="' . $url . '" id="home-logo-link-' . $Company_ID . '"><img src="' . $photo . '" width="70" align="left" style="padding: 15px;" /></a>' . chr(10);
+						$photo = $Companys['photo'];
+						$photo_width = $Companys['photo_width'];
 
-					$row .= '</td>' . chr(10);
-					$row .= '<td align="left">' . chr(10);
+						$Provider_Tags = $Companys['tags'];
 
-    				$row .= '<a href="' . $url . '" id="home-name-link-' . $Company_ID . '" style="color: #000;"><strong>' . $Name . '</strong></a>' . chr(10);
+						$Details = strip_tags($Details);
+						$Details = str_replace("&nbsp;", "", $Details);
 
-    				$row .= '</td>' . chr(10);
-
-
-    				$row .= '<td width="50" align="center">';
-    				if($url!='')
-    					{
-    					$row .= '<a href="' . $url . '" target="_blank" title="Website" id="home-icon-' . $Company_ID . '"><img id="home-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-home-icon.jpeg" width="18" align="center" /></a>' . chr(10);
-						}
-					$row .= '</td>' . chr(10);
-
-    				$row .= '<td width="50" align="center">';
-    				if($portal_url!='')
-    					{
-    					$row .= '<a href="' . $portal_url . '" target="_blank" title="Portal" id="portal-icon-' . $Company_ID . '"><img id="portal-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-portal-developers.jpg" width="20" align="center" /></a>' . chr(10);
-						}
-					$row .= '</td>' . chr(10);
-
-					$row .= '<td width="50" align="center">';
-					if($blog_url!='')
-						{
-    					$row .= '<a href="' . $blog_url . '" target="_blank" title="Blog" id="blog-icon-' . $Company_ID . '"><img id="blog-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-blog-icon.png" width="18" align="center" /></a>' . chr(10);
-						}
-					$row .= '</td>' . chr(10);
-					$row .= '<td width="50" align="center">';
-					if($blog_rss_url!='')
-						{
-    					$row .= '<a href="' . $blog_rss_url . '" target="_blank" title="Blog RSS" id="blogrss-icon-' . $Company_ID . '"><img id="blogrss-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-rss-icon.png" width="18" align="center" /></a>' . chr(10);
-						}
-					$row .= '</td>' . chr(10);
-					$row .= '<td width="50" align="center">';
-					if($twitter_url!='')
-						{
-    					$row .= '<a href="' . $twitter_url . '" target="_blank" title="Twitter" id="twitter-icon-' . $Company_ID . '"><img id="twitter-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-twitter-icon.png" width="23" align="center" /></a>' . chr(10);
-						}
-					$row .= '</td>' . chr(10);
-					$row .= '<td width="50" align="center">';
-					if($github_url!='')
-						{
-    					$row .= '<a href="' . $github_url . '" target="_blank" title="Github" id="github-icon-' . $Company_ID . '"><img id="github-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-github-icon.png" width="25" align="center" /></a>' . chr(10);
-						}
-					$row .= '</td>' . chr(10);
-					$row .= '<td width="50" align="center">';
-					if($apisjson_url!='')
-						{
-    					$row .= '<a href="' . $apisjson_url . '" target="_blank" title="APIs.json" id="apisjson-icon-' . $Company_ID . '"><img id="apisjson-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-api-a.png" width="25" align="center" /></a>' . chr(10);
-						}
-
-					$row .= '(<a href="/ask-swagger-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask Swagger Questions" id="ask-swagger-link-' . $Company_ID . '" style="font-size: 10px;">swagger</a>)' . chr(10);
-					$row .= '(<a href="/ask-apis-json-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask APIs.json Questions" id="ask-apisjson-link-' . $Company_ID . '" style="font-size: 10px;">apis.json</a>)' . chr(10);
-
-					$row .= '</td>' . chr(10);
-					$row .= '<td width="50" align="center">';
-					if($sdksio_url!='')
-						{
-    					$row .= '<a href="' . $sdksio_url . '" target="_blank" title="SDKs.io" id="sdksio-icon-' . $Company_ID . '"><img id="sdksio-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/api-evangelist/sdks-io/sdks-io-icon.png" width="25" align="center" /></a>' . chr(10);
-						}
-					$row .= '</td>' . chr(10);
-					$row .= '<td width="50" align="center">';
-					if($postman_url!='')
-						{
-    					$row .= '<a href="' . $postman_url . '" target="_blank" title="Postman Collection" id="sdksio-icon-' . $Company_ID . '"><img id="sdksio-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/building-blocks/x-postman.png" width="25" align="center" /></a>' . chr(10);
-						}
-					$row .= '</td>' . chr(10);
-					$row .= '<td width="150" align="center" id="github-issue-' . $Company_ID . '" style="font-size: 11px;">';
-					$row .= '</td>' . chr(10);
-    				$row .= '</tr>' . chr(10);
-
-					// APIs
-					$Stack['apis'] = array();
-					$APIQuery = "SELECT DISTINCT a.API_ID, a.Name,";
-					$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Website' LIMIT 1) AS Website_URL,";
-					$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL,";
-					$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Documentation' LIMIT 1) AS Documentation_URL,";
-					$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'SDKs.io' LIMIT 1) AS SDKsIO_URL";
-					$APIQuery .= " FROM api a";
-					$APIQuery .= " JOIN company_api_pivot cap ON a.API_ID = cap.API_ID";
-					$APIQuery .= " JOIN api_tag_pivot atp ON a.API_ID = atp.API_ID";
-					$APIQuery .= " JOIN tags t ON atp.Tag_ID = t.Tag_ID";
-
-					//echo $APIQuery . "<br /><br />";
-
-					if($thistag=='API-Stack')
-						{
-						$APIQuery .= " WHERE cap.Company_ID = " . $Company_ID . " AND t.Tag LIKE '%Stack'";
-						}
-					else
-						{
-						$APIQuery .= " WHERE cap.Company_ID = " . $Company_ID . " AND t.Tag = '" . $thistag . "'";
-						}
-
-					$APIQuery .= " ORDER BY a.Name";
-
-					//echo $APIQuery . "<br /><br />";
-					$APIResult = mysql_query($APIQuery) or die('Query failed: ' . mysql_error());
-					while ($APIRow = mysql_fetch_assoc($APIResult))
-						{
-
-						$API_ID = $APIRow['API_ID'];
-
-						$API_Name = $APIRow['Name'];
-
-						$API_Name_Slug = PrepareFileName($API_Name);
-
-						//echo " -- API-Name " . $API_Name . "<br />";
-
-						$Website_URL = trim($APIRow['Website_URL']);
-						$Swagger_URL = trim($APIRow['Swagger_URL']);
-						$Documentation_URL = trim($APIRow['Documentation_URL']);
-						$SDKsIO_URL = trim($APIRow['SDKsIO_URL']);
+						$Stack = array();
 
 						if($toggle==1)
 							{
-	    					$row .= '<tr style="background-color: #E0E0E0;">' . chr(10);
+	    					$row = '<tr style="background-color: #E0E0E0;">' . chr(10);
 							}
 						else
 							{
-	    					$row .= '<tr>' . chr(10);
+	    					$row = '<tr>' . chr(10);
 							}
 
 	    				$row .= '<td align="center" width="50">' . chr(10);
-						$row .= '</td>' . chr(10);
-						$row .= '<td align="left" style="font-size: 11px;">' . chr(10);
-						$row .= '' . $API_Name . '';
-						$row .= '</td>' . chr(10);
 
-						$row .= '<td width="50" align="center">' . chr(10);
-						if($Website_URL!=='')
-							{
-							$row .= '<a href="' . $Website_URL . '" target="_blank" title="Website"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-home-icon.jpeg" width="25" /></a>';
+	    				$row .= '<a href="' . $url . '" id="home-logo-link-' . $Company_ID . '"><img src="' . $photo . '" width="70" align="left" style="padding: 15px;" /></a>' . chr(10);
+
+						$row .= '</td>' . chr(10);
+						$row .= '<td align="left">' . chr(10);
+
+	    				$row .= '<a href="' . $url . '" id="home-name-link-' . $Company_ID . '" style="color: #000;"><strong>' . $Name . '</strong></a>' . chr(10);
+
+	    				$row .= '</td>' . chr(10);
+
+
+	    				$row .= '<td width="50" align="center">';
+	    				if($url!='')
+	    					{
+	    					$row .= '<a href="' . $url . '" target="_blank" title="Website" id="home-icon-' . $Company_ID . '"><img id="home-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-home-icon.jpeg" width="18" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
 
-						$row .= '<td width="50" align="center">' . chr(10);
-						if($Documentation_URL!=='')
-							{
-							$row .= '<a href="' . $Documentation_URL . '" target="_blank" title="Documentation"><img src="http://kinlane-productions.s3.amazonaws.com/api-evangelist-site/building-blocks/bw-list.png" width="25" /></a>';
+	    				$row .= '<td width="50" align="center">';
+	    				if($portal_url!='')
+	    					{
+	    					$row .= '<a href="' . $portal_url . '" target="_blank" title="Portal" id="portal-icon-' . $Company_ID . '"><img id="portal-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-portal-developers.jpg" width="20" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
 
-						$row .= '<td width="50" align="center">' . chr(10);
-						if($Swagger_URL!=='')
+						$row .= '<td width="50" align="center">';
+						if($blog_url!='')
 							{
-							$row .= '<a href="' . $Swagger_URL . '" target="_blank" title="Swagger"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-swagger-round.png" width="25" /></a>';
-							$row .= '<a href="/editor-swagger-json.html?swaggerurl=' . $Swagger_URL . '" target="_blank" title="Edit Swagger" style="font-size: 10px;">(edit)</a>';
-							$swagger_count++;
+	    					$row .= '<a href="' . $blog_url . '" target="_blank" title="Blog" id="blog-icon-' . $Company_ID . '"><img id="blog-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-blog-icon.png" width="18" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
-
-						$row .= '<td width="50" align="center">' . chr(10);
-						if($SDKsIO_URL!=='')
+						$row .= '<td width="50" align="center">';
+						if($blog_rss_url!='')
 							{
-							$row .= '<a href="' . $SDKsIO_URL . '" target="_blank" title="Swagger"><img src="https://s3.amazonaws.com/kinlane-productions/api-evangelist/sdks-io/sdks-io-icon.png" width="25" /></a>';
-							$swagger_count++;
+	    					$row .= '<a href="' . $blog_rss_url . '" target="_blank" title="Blog RSS" id="blogrss-icon-' . $Company_ID . '"><img id="blogrss-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-rss-icon.png" width="18" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
-						$row .= '<td width="50" align="center">' . chr(10);
+						$row .= '<td width="50" align="center">';
+						if($twitter_url!='')
+							{
+	    					$row .= '<a href="' . $twitter_url . '" target="_blank" title="Twitter" id="twitter-icon-' . $Company_ID . '"><img id="twitter-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-twitter-icon.png" width="23" align="center" /></a>' . chr(10);
+							}
 						$row .= '</td>' . chr(10);
-						$row .= '<td width="50" align="center">' . chr(10);
+						$row .= '<td width="50" align="center">';
+						if($github_url!='')
+							{
+	    					$row .= '<a href="' . $github_url . '" target="_blank" title="Github" id="github-icon-' . $Company_ID . '"><img id="github-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-github-icon.png" width="25" align="center" /></a>' . chr(10);
+							}
 						$row .= '</td>' . chr(10);
-						$row .= '<td width="50" align="center">' . chr(10);
-						$row .= '</td>' . chr(10);
-						$row .= '<td width="50" align="center">' . chr(10);
-						$row .= '</td>' . chr(10);
+						$row .= '<td width="50" align="center">';
+						if($apisjson_url!='')
+							{
+	    					$row .= '<a href="' . $apisjson_url . '" target="_blank" title="APIs.json" id="apisjson-icon-' . $Company_ID . '"><img id="apisjson-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-api-a.png" width="25" align="center" /></a>' . chr(10);
+							}
 
-						$row .= '</tr>' . chr(10);
+						$row .= '(<a href="/ask-swagger-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask Swagger Questions" id="ask-swagger-link-' . $Company_ID . '" style="font-size: 10px;">swagger</a>)' . chr(10);
+						$row .= '(<a href="/ask-apis-json-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask APIs.json Questions" id="ask-apisjson-link-' . $Company_ID . '" style="font-size: 10px;">apis.json</a>)' . chr(10);
 
-						$api_count++;
+						$row .= '</td>' . chr(10);
+						$row .= '<td width="50" align="center">';
+						if($sdksio_url!='')
+							{
+	    					$row .= '<a href="' . $sdksio_url . '" target="_blank" title="SDKs.io" id="sdksio-icon-' . $Company_ID . '"><img id="sdksio-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/api-evangelist/sdks-io/sdks-io-icon.png" width="25" align="center" /></a>' . chr(10);
+							}
+						$row .= '</td>' . chr(10);
+						$row .= '<td width="50" align="center">';
+						if($postman_url!='')
+							{
+	    					$row .= '<a href="' . $postman_url . '" target="_blank" title="Postman Collection" id="sdksio-icon-' . $Company_ID . '"><img id="sdksio-icon-img-' . $Company_ID . '" src="https://s3.amazonaws.com/kinlane-productions/building-blocks/x-postman.png" width="25" align="center" /></a>' . chr(10);
+							}
+						$row .= '</td>' . chr(10);
+						$row .= '<td width="150" align="center" id="github-issue-' . $Company_ID . '" style="font-size: 11px;">';
+						$row .= '</td>' . chr(10);
+	    				$row .= '</tr>' . chr(10);
 
+						// APIs
+						$Stack['apis'] = array();
+						$APIQuery = "SELECT DISTINCT a.API_ID, a.Name,";
+						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Website' LIMIT 1) AS Website_URL,";
+						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL,";
+						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Documentation' LIMIT 1) AS Documentation_URL,";
+						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'SDKs.io' LIMIT 1) AS SDKsIO_URL";
+						$APIQuery .= " FROM api a";
+						$APIQuery .= " JOIN company_api_pivot cap ON a.API_ID = cap.API_ID";
+						$APIQuery .= " JOIN api_tag_pivot atp ON a.API_ID = atp.API_ID";
+						$APIQuery .= " JOIN tags t ON atp.Tag_ID = t.Tag_ID";
+
+						//echo $APIQuery . "<br /><br />";
+
+						if($thistag=='API-Stack')
+							{
+							$APIQuery .= " WHERE cap.Company_ID = " . $Company_ID . " AND t.Tag LIKE '%Stack'";
+							}
+						else
+							{
+							$APIQuery .= " WHERE cap.Company_ID = " . $Company_ID . " AND t.Tag = '" . $thistag . "'";
+							}
+
+						$APIQuery .= " ORDER BY a.Name";
+
+						//echo $APIQuery . "<br /><br />";
+						$APIResult = mysql_query($APIQuery) or die('Query failed: ' . mysql_error());
+						while ($APIRow = mysql_fetch_assoc($APIResult))
+							{
+
+							$API_ID = $APIRow['API_ID'];
+
+							$API_Name = $APIRow['Name'];
+
+							$API_Name_Slug = PrepareFileName($API_Name);
+
+							//echo " -- API-Name " . $API_Name . "<br />";
+
+							$Website_URL = trim($APIRow['Website_URL']);
+							$Swagger_URL = trim($APIRow['Swagger_URL']);
+							$Documentation_URL = trim($APIRow['Documentation_URL']);
+							$SDKsIO_URL = trim($APIRow['SDKsIO_URL']);
+
+							if($toggle==1)
+								{
+		    					$row .= '<tr style="background-color: #E0E0E0;">' . chr(10);
+								}
+							else
+								{
+		    					$row .= '<tr>' . chr(10);
+								}
+
+		    				$row .= '<td align="center" width="50">' . chr(10);
+							$row .= '</td>' . chr(10);
+							$row .= '<td align="left" style="font-size: 11px;">' . chr(10);
+							$row .= '' . $API_Name . '';
+							$row .= '</td>' . chr(10);
+
+							$row .= '<td width="50" align="center">' . chr(10);
+							if($Website_URL!=='')
+								{
+								$row .= '<a href="' . $Website_URL . '" target="_blank" title="Website"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-home-icon.jpeg" width="25" /></a>';
+								}
+							$row .= '</td>' . chr(10);
+
+							$row .= '<td width="50" align="center">' . chr(10);
+							if($Documentation_URL!=='')
+								{
+								$row .= '<a href="' . $Documentation_URL . '" target="_blank" title="Documentation"><img src="http://kinlane-productions.s3.amazonaws.com/api-evangelist-site/building-blocks/bw-list.png" width="25" /></a>';
+								}
+							$row .= '</td>' . chr(10);
+
+							$row .= '<td width="50" align="center">' . chr(10);
+							if($Swagger_URL!=='')
+								{
+								$row .= '<a href="' . $Swagger_URL . '" target="_blank" title="Swagger"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-swagger-round.png" width="25" /></a>';
+								$row .= '<a href="/editor-swagger-json.html?swaggerurl=' . $Swagger_URL . '" target="_blank" title="Edit Swagger" style="font-size: 10px;">(edit)</a>';
+								$swagger_count++;
+								}
+							$row .= '</td>' . chr(10);
+
+							$row .= '<td width="50" align="center">' . chr(10);
+							if($SDKsIO_URL!=='')
+								{
+								$row .= '<a href="' . $SDKsIO_URL . '" target="_blank" title="Swagger"><img src="https://s3.amazonaws.com/kinlane-productions/api-evangelist/sdks-io/sdks-io-icon.png" width="25" /></a>';
+								$swagger_count++;
+								}
+							$row .= '</td>' . chr(10);
+							$row .= '<td width="50" align="center">' . chr(10);
+							$row .= '</td>' . chr(10);
+							$row .= '<td width="50" align="center">' . chr(10);
+							$row .= '</td>' . chr(10);
+							$row .= '<td width="50" align="center">' . chr(10);
+							$row .= '</td>' . chr(10);
+							$row .= '<td width="50" align="center">' . chr(10);
+							$row .= '</td>' . chr(10);
+
+							$row .= '</tr>' . chr(10);
+
+							$api_count++;
+
+							}
+
+						$ReturnHTML .= $row;
+
+						$F = array();
+						$F['name'] = $Name;
+						array_push($companies, $F);
+
+						if($toggle==1){ $toggle = 0; } else { $toggle = 1; }
+
+						$company_count++;
 						}
-
-					$ReturnHTML .= $row;
-
-					$F = array();
-					$F['name'] = $Name;
-					array_push($companies, $F);
-
-					if($toggle==1){ $toggle = 0; } else { $toggle = 1; }
-
-					$company_count++;
-
 					}
 				}
 
