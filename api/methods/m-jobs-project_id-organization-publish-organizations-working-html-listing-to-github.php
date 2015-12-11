@@ -161,8 +161,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 	    					$row .= '<a href="' . $apisjson_url . '" target="_blank" title="APIs.json" id="apisjson-icon-' . $organization_id . '"><img id="apisjson-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-api-a.png" width="25" align="center" /></a>' . chr(10);
 							}
 
-						$row .= '(<a href="/ask-swagger-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask Swagger Questions" id="ask-swagger-link-' . $organization_id . '" style="font-size: 10px;">swagger</a>)' . chr(10);
-						$row .= '(<a href="/ask-apis-json-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask APIs.json Questions" id="ask-apisjson-link-' . $organization_id . '" style="font-size: 10px;">apis.json</a>)' . chr(10);
+						//$row .= '(<a href="/ask-swagger-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask Swagger Questions" id="ask-swagger-link-' . $organization_id . '" style="font-size: 10px;">swagger</a>)' . chr(10);
+						//$row .= '(<a href="/ask-apis-json-questions.html?apisjson_url=' . $apisjson_url . '" target="_blank" title="Ask APIs.json Questions" id="ask-apisjson-link-' . $organization_id . '" style="font-size: 10px;">apis.json</a>)' . chr(10);
 
 						$row .= '</td>' . chr(10);
 						$row .= '<td width="50" align="center">';
@@ -257,7 +257,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 							if($Swagger_URL!=='')
 								{
 								$row .= '<a href="' . $Swagger_URL . '" target="_blank" title="Swagger"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-swagger-round.png" width="25" /></a>';
-								$row .= '<a href="/editor-swagger-json.html?swaggerurl=' . $Swagger_URL . '" target="_blank" title="Edit Swagger" style="font-size: 10px;">(edit)</a>';
+								//$row .= '<a href="/editor-swagger-json.html?swaggerurl=' . $Swagger_URL . '" target="_blank" title="Edit Swagger" style="font-size: 10px;">(edit)</a>';
 								$swagger_count++;
 								}
 							$row .= '</td>' . chr(10);
