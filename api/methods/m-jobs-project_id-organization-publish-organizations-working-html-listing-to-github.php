@@ -5,7 +5,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 	$host = $_SERVER['HTTP_HOST'];
 	$project_id = prepareIdIn($project_id,$host);
 
-	$ReturnHTML = '<table width="100%" border="0">';
+	$ReturnHTML = '<table width="100%" border="0" cellpadding="1" cellspacing="1">';
 
  	$request = $app->request();
  	$params = $request->params();
@@ -98,7 +98,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 						if($toggle==1)
 							{
-	    					$row = '<tr style="background-color: #E0E0E0;">' . chr(10);
+	    					$row = '<tr style="background-color: #FFF;">' . chr(10);
 							}
 						else
 							{
@@ -226,7 +226,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 							if($toggle==1)
 								{
-		    					$row .= '<tr style="background-color: #E0E0E0;">' . chr(10);
+		    					$row .= '<tr style="background-color: #FFF;">' . chr(10);
 								}
 							else
 								{
