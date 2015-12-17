@@ -8,6 +8,8 @@ require_once "m-project-tags-tag-delete.php";
 
 require_once "m-project-tags-tag-project-get.php";
 
+require_once "m-jobs-project_id-apisjson-publish-apisjson-to-github-get.php";
+
 require_once "m-jobs-project_id-blog-publish-jekyll-html-to-github.php";
 
 require_once "m-jobs-project_id-news-publish-jekyll-html-to-github.php";
