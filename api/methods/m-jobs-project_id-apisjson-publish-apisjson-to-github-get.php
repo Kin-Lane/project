@@ -56,9 +56,13 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			$swagger_count = 0;
 			$api_count = 0;
 
+      $ReturnObject = array();
+
 			if(count($Organizations) > 0)
 				{
-				$toggle = 0;
+
+        $toggle = 0;
+
 				foreach($Organizations as $Companys)
 					{
 
@@ -127,7 +131,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
       			$Tags = array();
       			$TagQuery = "SELECT DISTINCT t.Tag FROM tags t JOIN company_tag_pivot ctp ON t.Tag_ID = ctp.Tag_ID WHERE ctp.Company_ID = " . $organization_id . " AND t.Tag NOT LIKE '%-Stack' ORDER BY t.Tag";
-      			echo $TagQuery;
+      			//echo $TagQuery;
 
       			$APIJSON['tags'] = $Tags;
 
@@ -215,71 +219,44 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
       			$APIJSON['include'] = array();
 
-      			// Begin APIs
-      			$APIQuery = "SELECT a.API_ID,a.Name,a.About FROM api WHERE Company_ID = " . $organization_id . " ORDER BY Name";
-      			//echo $TagQuery;
-      			$APIResult = mysql_query($APIQuery) or die('Query failed: ' . mysql_error());
-      			$rowcount = 1;
+    				$APIJSON['maintainers'] = array();
 
-      			if($APIResult && mysql_num_rows($APIResult))
-      				{
-      				while ($API = mysql_fetch_assoc($APIResult))
-      					{
+    				$Maintainer = array();
+    				$Maintainer['FN'] = "Kin";
+    				$Maintainer['X-twitter'] = "apievangelist";
+    				$Maintainer['email'] = "kin@email.com";
 
-      					$API_ID = $API['API_ID'];
-      					$API_Name = $API['Name'];
-      					$API_About = $API['About'];
-                $API_Website_URL = "";
+    				array_push($APIJSON['maintainers'], $Maintainer);
 
-      					$API_About = str_replace(chr(34),"",$API_About);
-      					$API_About = str_replace(chr(39),"",$API_About);
-      					$API_About = strip_tags($API_About);
-      					$API_About = mysql_real_escape_string($API_About);
+    				$ReturnEachAPIJSON = stripslashes(format_json(json_encode($APIJSON)));
 
-      					$Include = array();
-      					$Include['name'] = $API_Name;
-      					$Include['url'] = $API_Website_URL;
-      					array_push($APIJSON['include'], $Include);
+    				$API['contact'] = array();
+    				$Contact = array();
+    				$Contact['FN'] = $Company_Name;
+    				if($Email_Address!='')
+    					{
+    					$Contact['email'] = trim(str_replace("mailto:","",$Email_Address));
+    					}
 
-      					}
+    				if($twitter_url!='')
+    					{
+    					$Contact['X-twitter'] = $twitter_url;
+    					}
+    				array_push($API['contact'], $Contact);
 
-      				$APIJSON['maintainers'] = array();
+    				array_push($APIJSON['apis'], $API);
 
-      				$Maintainer = array();
-      				$Maintainer['FN'] = "Kin";
-      				$Maintainer['X-twitter'] = "apievangelist";
-      				$Maintainer['email'] = "kin@email.com";
+    				$APIJSON['maintainers'] = array();
 
-      				array_push($APIJSON['maintainers'], $Maintainer);
+    				$Maintainer = array();
+    				$Maintainer['FN'] = "Kin";
+    				$Maintainer['X-twitter'] = "apievangelist";
+    				$Maintainer['email'] = "kin@email.com";
 
-      				$ReturnEachAPIJSON = stripslashes(format_json(json_encode($APIJSON)));
+    				array_push($APIJSON['maintainers'], $Maintainer);
 
-      				$API['contact'] = array();
-      				$Contact = array();
-      				$Contact['FN'] = $Company_Name;
-      				if($Email_Address!='')
-      					{
-      					$Contact['email'] = trim(str_replace("mailto:","",$Email_Address));
-      					}
+            array_push($ReturnObject,$APIJSON);
 
-      				if($twitter_url!='')
-      					{
-      					$Contact['X-twitter'] = $twitter_url;
-      					}
-      				array_push($API['contact'], $Contact);
-
-      				array_push($APIJSON['apis'], $API);
-
-      				$APIJSON['maintainers'] = array();
-
-      				$Maintainer = array();
-      				$Maintainer['FN'] = "Kin";
-      				$Maintainer['X-twitter'] = "apievangelist";
-      				$Maintainer['email'] = "kin@email.com";
-
-      				array_push($APIJSON['maintainers'], $Maintainer);
-
-      				}
       			}
       		}
         }
