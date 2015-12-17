@@ -289,9 +289,9 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       					$Contact['email'] = trim(str_replace("mailto:","",$Email_Address));
       					}
 
-      				if($Twitter_URL!='')
+      				if($twitter_url!='')
       					{
-      					$Contact['X-twitter'] = $Twitter_URL;
+      					$Contact['X-twitter'] = $twitter_url;
       					}
       				array_push($API['contact'], $Contact);
 
