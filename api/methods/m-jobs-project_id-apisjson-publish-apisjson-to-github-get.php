@@ -219,7 +219,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
   							$API_ID = $APIRow['API_ID'];
   							$API_Name = $APIRow['Name'];
                 $API_About = $APIRow['About'];
-                if($API_About = '')
+                if($API_About == '')
                   {
                   $API_About = $Body;
                   }
@@ -228,7 +228,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
   							//echo " -- API-Name " . $API_Name . "<br />";
 
   							$Website_URL = trim($APIRow['Website_URL']);
-                if($Website_URL = '')
+                if($Website_URL == '')
                   {
                   $Website_URL = $url;
                   }
