@@ -5,8 +5,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 	$host = $_SERVER['HTTP_HOST'];
 	$project_id = prepareIdIn($project_id,$host);
 
-	$ReturnHTML = '<table width="100%" border="0" cellpadding="1" cellspacing="1">';
-
  	$request = $app->request();
  	$params = $request->params();
 
@@ -38,7 +36,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 			$companies = array();
 			$thistag = $Tag['tag'];
-			//echo $thistag . "<br />";
 
 			$url = "http://organization.api.kinlane.com/organization/tags/" . urlencode($thistag) . "/?appid=" . $appid . "&appkey=" . $appkey;
 			//echo $url . "<br />";
@@ -46,7 +43,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			$http = curl_init();
 			curl_setopt($http, CURLOPT_URL, $url);
 			curl_setopt($http, CURLOPT_RETURNTRANSFER, 1);
-
 			curl_setopt($http, CURLOPT_SSL_VERIFYPEER, false);
 
 			$output = curl_exec($http);
@@ -324,13 +320,14 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       				}
       			}
       		}
-
-      	$ReturnObject = $APIJSON;
+        }
       }
     }
 
+  $ReturnObject = $APIJSON;
+
   $app->response()->header("Content-Type", "application/json");
   echo format_json(json_encode($ReturnObject));
+  });
 
-});
 ?>
