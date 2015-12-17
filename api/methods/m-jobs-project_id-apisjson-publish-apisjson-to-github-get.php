@@ -293,8 +293,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       }
     }
 
-  $ReturnObject = $APIJSON;
-
   $app->response()->header("Content-Type", "application/json");
   echo format_json(json_encode($ReturnObject));
   });
