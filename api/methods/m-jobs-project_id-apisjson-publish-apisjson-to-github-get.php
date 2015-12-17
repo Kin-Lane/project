@@ -126,6 +126,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			array_push($Tags, $Tag);
 
       			$Tags = array();
+      			$TagQuery = "SELECT DISTINCT t.Tag FROM tags t JOIN company_tag_pivot ctp ON t.Tag_ID = ctp.Tag_ID WHERE ctp.Company_ID = " . $organization_id . " AND t.Tag NOT LIKE '%-Stack' ORDER BY t.Tag";
+      			echo $TagQuery;
 
       			$APIJSON['tags'] = $Tags;
 
@@ -157,11 +159,9 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
       			$API['properties'] = array();
 
-      			array_push($APIJSON['apis'], $API);
+      			$CompanyURLQuery = "SELECT * FROM company_url WHERE Company_ID = " . $organization_id . " ORDER BY Name, Type";
+      			echo $CompanyURLQuery . "<br />";
 
-      			$APIJSON['include'] = array();
-
-      			
       			}
       		}
         }
