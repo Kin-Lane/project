@@ -38,7 +38,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			$thistag = $Tag['tag'];
 
 			$url = "http://organization.api.kinlane.com/organization/tags/" . urlencode($thistag) . "/?appid=" . $appid . "&appkey=" . $appkey;
-			echo $url . "<br />";
+			//echo $url . "<br />";
 
 			$http = curl_init();
 			curl_setopt($http, CURLOPT_URL, $url);
