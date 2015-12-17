@@ -38,6 +38,8 @@ require_once "m-jobs-project_id-buildingblock-publish-building-blocks-by-categor
 
 require_once "m-jobs-project_id-buildingblock-publish-building-blocks-json-to-github.php";
 
+require_once "m-jobs-project_id-buildingblock-publish-building-blocks-by-category-journey-to-github.php";
+
 require_once "m-project-bytitle-title.php";
 require_once "m-project-bytype-type.php";
 require_once "m-project-groupbytype.php";
