@@ -98,6 +98,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			$Company_Name_Slug = PrepareFileName($Company_Name);
 
       			$API_JSON_URL = $project_subdomain . "/data/" . $Company_Name_Slug . "/apis.json";
+            $API_JSON_File =  "data/" . $Company_Name_Slug . "/apis.json";
 
       			$Body = $Details;
 
@@ -304,6 +305,41 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
             if($API_Count>0)
               {
               array_push($ReturnObject,$APIJSON);
+
+              $company_content = stripslashes(prettyPrint(json_encode($APIJSON)));
+
+        			$data_store_file = $API_JSON_File;
+
+        			// Github
+        			$GitHubClient = new GitHubClient();
+        			$GitHubClient->setCredentials($guser,$gpass);
+
+        			$owner = $project_github_user;
+        			$ref = "gh-pages";
+
+        			try
+        				{
+        				$CheckFile = $GitHubClient->repos->contents->getContents($owner, $project_github_repo, $ref, $data_store_file);
+
+        				$name = $CheckFile->getname();
+        				$content = base64_decode($CheckFile->getcontent());
+        				$sha = $CheckFile->getsha();
+
+        				$message = "Updating " . $data_store_file . " via Laneworks CMS Publish";
+        				$content = base64_encode($company_content);
+
+        				$updateFile = $GitHubClient->repos->contents->updateFile($owner, $project_github_repo, $data_store_file, $message, $content, $sha, $ref);
+        				}
+        			catch (Exception $e)
+        				{
+
+        				$message = "Adding " . $data_store_file . " via Laneworks CMS Publish";
+        				$content = base64_encode($company_content);
+
+        				$updateFile = $GitHubClient->repos->contents->createFile($owner, $project_github_repo, $data_store_file, $message, $content, $ref);
+
+        				}
+
               }
       			}
       		}
