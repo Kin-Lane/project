@@ -269,6 +269,9 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
         					$Link['url'] = trim($SDKsIO_URL);
         					array_push($API['properties'], $Link);
                   }
+
+                array_push($APIJSON['apis'], $API);
+
                 }
 
       			$APIJSON['include'] = array();
