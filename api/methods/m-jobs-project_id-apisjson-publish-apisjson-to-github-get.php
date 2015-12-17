@@ -160,7 +160,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			$API['description'] = $Body;
       			$API['image'] = trim($photo);
 
-      			$API['humanURL'] = trim($Website_URL);
+      			$API['humanURL'] = trim($url);
 
       			if($Base_URL!='')
       				{
@@ -168,7 +168,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       				}
       			else
       				{
-      				$API['baseURL'] = trim($Website_URL);
+      				$API['baseURL'] = trim($url);
       				}
 
       			$API['tags'] = $Tags;
