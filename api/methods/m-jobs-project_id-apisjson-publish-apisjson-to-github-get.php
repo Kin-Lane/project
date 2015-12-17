@@ -119,7 +119,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
       			// Manage the API.json Tags
             $Tags = array();
-      			$TagQuery = "SELECT DISTINCT t.Tag FROM tags t JOIN company_tag_pivot ctp ON t.Tag_ID = ctp.Tag_ID WHERE ctp.Company_ID = " . $Company_ID . " AND t.Tag NOT LIKE '%-Stack' ORDER BY t.Tag";
+      			$TagQuery = "SELECT DISTINCT t.Tag FROM tags t JOIN company_tag_pivot ctp ON t.Tag_ID = ctp.Tag_ID WHERE ctp.Company_ID = " . $organization_id . " AND t.Tag NOT LIKE '%-Stack' ORDER BY t.Tag";
       			//echo $TagQuery;
       			$TagResult = mysql_query($TagQuery) or die('Query failed: ' . mysql_error());
       			$rowcount = 1;
