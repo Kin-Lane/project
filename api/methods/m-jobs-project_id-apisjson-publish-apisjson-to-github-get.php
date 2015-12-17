@@ -8,6 +8,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
  	$request = $app->request();
  	$params = $request->params();
 
+
 	$ProjectQuery = "SELECT * FROM project WHERE Project_ID = " . $project_id;
 	//echo $ProjectQuery;
 	$ProjectResults = mysql_query($ProjectQuery) or die('Query failed: ' . mysql_error());
@@ -21,9 +22,37 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 		$project_github_repo = $Project['Github_Repo'];
 		$project_subdomain = $Project['Subdomain'];
 		$project_type = $Project['Type'];
+    $project_image = $Project['Image'];
 
 		$project_github_url = "https://github.com/kinlane/" . $project_github_repo;
 		$project_github_path = '/var/www/html/repos/' . $project_github_repo;
+
+
+    // Begin Master APIs.json
+    $MasterAPIJSON = array();
+    $MasterAPIJSON['name'] = trim($project_title);
+    if($project_summary!='')
+      {
+      $MasterAPIJSON['description'] = trim($project_summary);
+      }
+    if($project_image!='')
+      {
+      $MasterAPIJSON['image'] = trim($project_image);
+      }
+
+    $MasterAPIJSON['tags'] = $Tags;
+
+    $MasterAPIJSON['created'] = date('Y-m-d');
+    $MasterAPIJSON['modified'] = date('Y-m-d');
+
+    $Master_API_JSON_URL = $project_subdomain . "/apis.json"
+    $MasterAPIJSON['url'] = $Master_API_JSON_URL;
+    $MasterAPIJSON['specificationVersion'] = "0.14";
+
+    $MasterAPIJSON['apis'] = array();
+
+    $MasterAPIJSON['include'] = array();
+
 
 		$TagQuery = "SELECT t.tag_id, t.tag from tags t";
 		$TagQuery .= " INNER JOIN project_tag_pivot ptp ON t.tag_id = ptp.tag_id";
@@ -111,6 +140,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			$APIJSON_Include = array();
       			$APIJSON_Include['name'] = $Company_Name;
       			$APIJSON_Include['url'] = $API_JSON_URL;
+            array_push($MasterAPIJSON['include'] , $APIJSON_Include);
 
       			// Begin Individual APIs.json
       			$APIJSON = array();
@@ -347,8 +377,49 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       }
     }
 
+  $MasterAPIJSON['maintainers'] = array();
+  $Maintainer = array();
+  $Maintainer['FN'] = "Kin";
+  $Maintainer['X-twitter'] = "apievangelist";
+  $Maintainer['email'] = "info@apievangelist.com";
+  array_push($MasterAPIJSON['maintainers'], $Maintainer);
+
+
+  $project_content = stripslashes(prettyPrint(json_encode($MasterAPIJSON)));
+  $data_store_file = $Master_API_JSON_URL;
+
+  // Github
+  $GitHubClient = new GitHubClient();
+  $GitHubClient->setCredentials($guser,$gpass);
+
+  $owner = $project_github_user;
+  $ref = "gh-pages";
+
+  try
+    {
+    $CheckFile = $GitHubClient->repos->contents->getContents($owner, $project_github_repo, $ref, $data_store_file);
+
+    $name = $CheckFile->getname();
+    $content = base64_decode($CheckFile->getcontent());
+    $sha = $CheckFile->getsha();
+
+    $message = "Updating " . $data_store_file . " via Laneworks CMS Publish";
+    $content = base64_encode($project_content);
+
+    $updateFile = $GitHubClient->repos->contents->updateFile($owner, $project_github_repo, $data_store_file, $message, $content, $sha, $ref);
+    }
+  catch (Exception $e)
+    {
+
+    $message = "Adding " . $data_store_file . " via Laneworks CMS Publish";
+    $content = base64_encode($project_content);
+
+    $updateFile = $GitHubClient->repos->contents->createFile($owner, $project_github_repo, $data_store_file, $message, $content, $ref);
+
+    }
+
   $app->response()->header("Content-Type", "application/json");
-  echo stripslashes(format_json(json_encode($ReturnObject)));
+  echo $project_content;
   });
 
 ?>
