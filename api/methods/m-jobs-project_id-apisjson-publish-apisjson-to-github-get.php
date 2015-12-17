@@ -38,7 +38,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			$thistag = $Tag['tag'];
 
 			$url = "http://organization.api.kinlane.com/organization/tags/" . urlencode($thistag) . "/?appid=" . $appid . "&appkey=" . $appkey;
-			//echo $url . "<br />";
+			echo $url . "<br />";
 
 			$http = curl_init();
 			curl_setopt($http, CURLOPT_URL, $url);
@@ -164,7 +164,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			$API['properties'] = array();
 
       			$CompanyURLQuery = "SELECT * FROM company_url WHERE Company_ID = " . $organization_id . " ORDER BY Name, Type";
-      			echo $CompanyURLQuery . "<br />";
+      			//echo $CompanyURLQuery . "<br />";
       			$CompanyURLResult = mysql_query($CompanyURLQuery) or die('Query failed: ' . mysql_error());
 
       			while ($CompanyURL = mysql_fetch_assoc($CompanyURLResult))
