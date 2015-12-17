@@ -74,6 +74,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 						$Screenshot_URL = $Companys['photo'];
 
 						$url = $Companys['url'];
+            $Email_Address = $Companys['email'];
 						$blog_url = $Companys['blog_url'];
 						$blog_rss_url = $Companys['blog_rss_url'];
 						$twitter_url = $Companys['twitter_url'];
@@ -109,25 +110,13 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
       			// Base URL
       			$Base_URL = "";
-      			$query = "SELECT Company_URL_ID,Type,URL FROM company_url WHERE Company_ID = " . $Company_ID . " AND Type = 'BaseURL'";
+      			$query = "SELECT Company_URL_ID,Type,URL FROM company_url WHERE Company_ID = " . $organization_id . " AND Type = 'BaseURL'";
       			$linkResult = mysql_query($query) or die('Query failed: ' . mysql_error());
       			if($linkResult && mysql_num_rows($linkResult))
       				{
       				while ($link = mysql_fetch_assoc($linkResult))
       					{
       					$Base_URL = $link['URL'];
-      					}
-      				}
-
-      			// Email
-      			$Email_Address = "";
-      			$query = "SELECT Company_URL_ID,Type,URL FROM company_url WHERE Company_ID = " . $Company_ID . " AND Type = 'Email'";
-      			$linkResult = mysql_query($query) or die('Query failed: ' . mysql_error());
-      			if($linkResult && mysql_num_rows($linkResult))
-      				{
-      				while ($link = mysql_fetch_assoc($linkResult))
-      					{
-      					$Email_Address = $link['URL'];
       					}
       				}
 
@@ -146,7 +135,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			array_push($Tags, $Tag);
 
       			$Tags = array();
-      			$TagQuery = "SELECT DISTINCT t.Tag FROM tags t JOIN company_tag_pivot ctp ON t.Tag_ID = ctp.Tag_ID WHERE ctp.Company_ID = " . $Company_ID . " AND t.Tag NOT LIKE '%-Stack' ORDER BY t.Tag";
+      			$TagQuery = "SELECT DISTINCT t.Tag FROM tags t JOIN company_tag_pivot ctp ON t.Tag_ID = ctp.Tag_ID WHERE ctp.Company_ID = " . $organization_id . " AND t.Tag NOT LIKE '%-Stack' ORDER BY t.Tag";
       			//echo $TagQuery;
       			$TagResult = mysql_query($TagQuery) or die('Query failed: ' . mysql_error());
       			$rowcount = 1;
@@ -186,7 +175,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
       			$API['properties'] = array();
 
-      			$CompanyURLQuery = "SELECT * FROM company_url WHERE Company_ID = " . $Company_ID . " ORDER BY Name, Type";
+      			$CompanyURLQuery = "SELECT * FROM company_url WHERE Company_ID = " . $organization_id . " ORDER BY Name, Type";
       			//echo $CompanyURLQuery . "<br />";
       			$CompanyURLResult = mysql_query($CompanyURLQuery) or die('Query failed: ' . mysql_error());
 
@@ -243,7 +232,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			$APIJSON['include'] = array();
 
       			// Begin APIs
-      			$APIQuery = "SELECT * FROM api WHERE Company_ID = " . $Company_ID . " ORDER BY Name";
+      			$APIQuery = "SELECT * FROM api WHERE Company_ID = " . $organization_id . " ORDER BY Name";
       			//echo $TagQuery;
       			$APIResult = mysql_query($APIQuery) or die('Query failed: ' . mysql_error());
       			$rowcount = 1;
