@@ -161,7 +161,125 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
       			$CompanyURLQuery = "SELECT * FROM company_url WHERE Company_ID = " . $organization_id . " ORDER BY Name, Type";
       			echo $CompanyURLQuery . "<br />";
+      			$CompanyURLResult = mysql_query($CompanyURLQuery) or die('Query failed: ' . mysql_error());
 
+      			while ($CompanyURL = mysql_fetch_assoc($CompanyURLResult))
+      				{
+      				$Company_URL_ID = $CompanyURL['Company_URL_ID'];
+
+      				$API_URL = $CompanyURL['URL'];
+      				$API_URL_Name = $CompanyURL['Name'];
+      				$API_URL_Type = $CompanyURL['Type'];
+
+      				$API_Building_Block_ID = $CompanyURL['Building_Block_ID'];
+
+      				$API_Building_Block_Name = "";
+      				$API_Building_Block_Description = "";
+      				$API_Building_Block_Icon = "";
+
+      				if($API_Building_Block_ID>0)
+      					{
+
+      					$Building_Block_Query = "SELECT Building_Block_ID, bb.Name AS Building_Block_Name, bb.About, bbc.Name AS Building_Block_Category_Name, bbc.Type as Type FROM building_block bb JOIN building_block_category bbc ON bb.Building_Block_Category_ID = bbc.BuildingBlockCategory_ID WHERE Building_Block_ID = " . $API_Building_Block_ID;
+      					//echo $Building_Block_Query . "<br />";
+      					$Building_Block_Result = mysql_query($Building_Block_Query) or die('Query failed: ' . mysql_error());
+      					if($Building_Block_Result && mysql_num_rows($Building_Block_Result))
+      						{
+      						$HaveBuildingBlock = 1;
+      						$Building_Block = mysql_fetch_assoc($Building_Block_Result);
+
+      						$Building_Block_Image_Query = "SELECT Image_Name,Image_Path FROM building_block_image WHERE Image_Path <> '' AND Building_Block_ID = " . $API_Building_Block_ID . " ORDER BY Building_Block_Image_ID DESC";
+      						$Building_Block_Image_Result = mysql_query($Building_Block_Image_Query) or die('Query failed: ' . mysql_error());
+      						while ($Building_Block_Image = mysql_fetch_assoc($Building_Block_Image_Result))
+      							{
+      							$API_Building_Block_Icon = $Building_Block_Image['Image_Path'];
+      							}
+
+      						$API_Building_Block_Name = $Building_Block['Building_Block_Name'];
+      						//echo "Building Block Name: " . $API_Building_Block_Name . "<br />";
+      						$API_Building_Block_Description = $Building_Block['About'];
+
+      						}
+
+      					$API_URL_Type_Slug = PrepareFileName($API_Building_Block_Name);
+
+      					$Link = array();
+      					$Link['type'] = "X-" . $API_URL_Type_Slug;
+      					$Link['url'] = trim($API_URL);
+      					array_push($API['properties'], $Link);
+
+      					}
+      				}
+
+      			array_push($APIJSON['apis'], $API);
+
+      			$APIJSON['include'] = array();
+
+      			// Begin APIs
+      			$APIQuery = "SELECT a.API_ID,a.Name,a.About FROM api WHERE Company_ID = " . $organization_id . " ORDER BY Name";
+      			//echo $TagQuery;
+      			$APIResult = mysql_query($APIQuery) or die('Query failed: ' . mysql_error());
+      			$rowcount = 1;
+
+      			if($APIResult && mysql_num_rows($APIResult))
+      				{
+      				while ($API = mysql_fetch_assoc($APIResult))
+      					{
+
+      					$API_ID = $API['API_ID'];
+      					$API_Name = $API['Name'];
+      					$API_About = $API['About'];
+                $API_Website_URL = "";
+
+      					$API_About = str_replace(chr(34),"",$API_About);
+      					$API_About = str_replace(chr(39),"",$API_About);
+      					$API_About = strip_tags($API_About);
+      					$API_About = mysql_real_escape_string($API_About);
+
+      					$Include = array();
+      					$Include['name'] = $API_Name;
+      					$Include['url'] = $API_Website_URL;
+      					array_push($APIJSON['include'], $Include);
+
+      					}
+
+      				$APIJSON['maintainers'] = array();
+
+      				$Maintainer = array();
+      				$Maintainer['FN'] = "Kin";
+      				$Maintainer['X-twitter'] = "apievangelist";
+      				$Maintainer['email'] = "kin@email.com";
+
+      				array_push($APIJSON['maintainers'], $Maintainer);
+
+      				$ReturnEachAPIJSON = stripslashes(format_json(json_encode($APIJSON)));
+
+      				$API['contact'] = array();
+      				$Contact = array();
+      				$Contact['FN'] = $Company_Name;
+      				if($Email_Address!='')
+      					{
+      					$Contact['email'] = trim(str_replace("mailto:","",$Email_Address));
+      					}
+
+      				if($twitter_url!='')
+      					{
+      					$Contact['X-twitter'] = $twitter_url;
+      					}
+      				array_push($API['contact'], $Contact);
+
+      				array_push($APIJSON['apis'], $API);
+
+      				$APIJSON['maintainers'] = array();
+
+      				$Maintainer = array();
+      				$Maintainer['FN'] = "Kin";
+      				$Maintainer['X-twitter'] = "apievangelist";
+      				$Maintainer['email'] = "kin@email.com";
+
+      				array_push($APIJSON['maintainers'], $Maintainer);
+
+      				}
       			}
       		}
         }
