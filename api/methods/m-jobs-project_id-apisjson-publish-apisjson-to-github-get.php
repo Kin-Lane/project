@@ -200,7 +200,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
   						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Website' LIMIT 1) AS Website_URL,";
   						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL,";
   						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Documentation' LIMIT 1) AS Documentation_URL,";
-  						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'SDKs.io' LIMIT 1) AS SDKsIO_URL,";
+  						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'SDKs.io' LIMIT 1) AS SDKsIO_URL";
   						$APIQuery .= " FROM api a";
   						$APIQuery .= " JOIN company_api_pivot cap ON a.API_ID = cap.API_ID";
   						$APIQuery .= " JOIN api_tag_pivot atp ON a.API_ID = atp.API_ID";
