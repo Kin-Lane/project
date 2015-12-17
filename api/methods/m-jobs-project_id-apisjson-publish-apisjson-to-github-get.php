@@ -45,7 +45,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
     $MasterAPIJSON['created'] = date('Y-m-d');
     $MasterAPIJSON['modified'] = date('Y-m-d');
 
-    $Master_API_JSON_URL = $project_subdomain . "/apis.json"
+    $Master_API_JSON_URL = $project_subdomain . "/apis.json";
     $MasterAPIJSON['url'] = $Master_API_JSON_URL;
     $MasterAPIJSON['specificationVersion'] = "0.14";
 
