@@ -124,7 +124,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			$APIJSON = array();
       			$APIJSON['name'] = trim($Company_Name);
       			$APIJSON['description'] = trim($Body);
-      			$APIJSON['image'] = trim($Logo_Image_Path);
+      			$APIJSON['image'] = trim($photo);
 
       			// Maange the API.json Tags
       			$Tags = array();
@@ -158,7 +158,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			$API = array();
       			$API['name'] = $Company_Name;
       			$API['description'] = $Body;
-      			$API['image'] = trim($Logo_Image_Path);
+      			$API['image'] = trim($photo);
 
       			$API['humanURL'] = trim($Website_URL);
 
