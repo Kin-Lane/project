@@ -85,6 +85,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 						$sdksio_url = $Companys['sdksio_url'];
 						$postman_url = $Companys['postman_url'];
 						$portal_url = $Companys['portal_url'];
+            $base_url = $Companys['base_url'];
 
 						$photo = $Companys['photo'];
 						$photo_width = $Companys['photo_width'];
@@ -109,9 +110,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			$APIJSON_Include = array();
       			$APIJSON_Include['name'] = $Company_Name;
       			$APIJSON_Include['url'] = $API_JSON_URL;
-
-      			// Base URL
-      			$Base_URL = "";
 
       			// Begin Individual APIs.json
       			$APIJSON = array();
@@ -203,7 +201,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
   						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL,";
   						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Documentation' LIMIT 1) AS Documentation_URL,";
   						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'SDKs.io' LIMIT 1) AS SDKsIO_URL,";
-              $APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Base URL' LIMIT 1) AS Base_URL";
   						$APIQuery .= " FROM api a";
   						$APIQuery .= " JOIN company_api_pivot cap ON a.API_ID = cap.API_ID";
   						$APIQuery .= " JOIN api_tag_pivot atp ON a.API_ID = atp.API_ID";
@@ -235,7 +232,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
   							$Swagger_URL = trim($APIRow['Swagger_URL']);
   							$Documentation_URL = trim($APIRow['Documentation_URL']);
   							$SDKsIO_URL = trim($APIRow['SDKsIO_URL']);
-                $Base_URL = trim($APIRow['Base_URL']);
 
                 $API = array();
           			$API['name'] = $API_Name;
@@ -244,13 +240,13 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
           			$API['humanURL'] = trim($Website_URL);
 
-          			if($Base_URL=='')
+          			if($base_url=='')
           				{
           				$API['baseURL'] = trim($Website_URL);
           				}
           			else
           				{
-                  $API['baseURL'] = trim($Base_URL);
+                  $API['baseURL'] = trim($base_url);
           				}
 
           			$API['tags'] = $Tags;
