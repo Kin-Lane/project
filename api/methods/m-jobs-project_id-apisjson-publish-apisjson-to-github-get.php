@@ -117,10 +117,19 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			$APIJSON['description'] = trim($Body);
       			$APIJSON['image'] = trim($photo);
 
-      			// Maange the API.json Tags
-      			$Tags = array();
-      			$Tag =  array('api');
-      			array_push($Tags, $Tag);
+      			// Manage the API.json Tags
+            $Tags = array();
+      			$TagQuery = "SELECT DISTINCT t.Tag FROM tags t JOIN company_tag_pivot ctp ON t.Tag_ID = ctp.Tag_ID WHERE ctp.Company_ID = " . $Company_ID . " AND t.Tag NOT LIKE '%-Stack' ORDER BY t.Tag";
+      			//echo $TagQuery;
+      			$TagResult = mysql_query($TagQuery) or die('Query failed: ' . mysql_error());
+      			$rowcount = 1;
+      			while ($ThisTag = mysql_fetch_assoc($TagResult))
+      				{
+      				$Tag = strtolower($ThisTag['Tag']);
+      				array_push($Tags, $Tag);
+      				}
+
+      			$APIJSON['tags'] = $Tags;
 
       			$Tag =  array('application programming interfaces');
       			array_push($Tags, $Tag);
