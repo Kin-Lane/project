@@ -225,13 +225,13 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
                   }
 
   							$API_Name_Slug = PrepareFileName($API_Name);
-  							//echo " -- API-Name " . $API_Name . "<br />";
 
   							$Website_URL = trim($APIRow['Website_URL']);
                 if($Website_URL == '')
                   {
                   $Website_URL = $url;
                   }
+
   							$Swagger_URL = trim($APIRow['Swagger_URL']);
   							$Documentation_URL = trim($APIRow['Documentation_URL']);
   							$SDKsIO_URL = trim($APIRow['SDKsIO_URL']);
@@ -244,13 +244,13 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
           			$API['humanURL'] = trim($Website_URL);
 
-          			if($Base_URL!='')
+          			if($Base_URL=='')
           				{
-          				$API['baseURL'] = trim($Base_URL);
+          				$API['baseURL'] = trim($Website_URL);
           				}
           			else
           				{
-          				$API['baseURL'] = trim($Website_URL);
+                  $API['baseURL'] = trim($Base_URL);
           				}
 
           			$API['tags'] = $Tags;
