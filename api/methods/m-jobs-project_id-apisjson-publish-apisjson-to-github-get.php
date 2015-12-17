@@ -197,6 +197,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
               //
               // APIs
               //
+              $API_Count = 0;
   						$APIQuery = "SELECT DISTINCT a.API_ID, a.Name, a.About,";
   						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Website' LIMIT 1) AS Website_URL,";
   						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL,";
@@ -218,9 +219,19 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
   							$API_ID = $APIRow['API_ID'];
   							$API_Name = $APIRow['Name'];
                 $API_About = $APIRow['About'];
+                if($API_About = '')
+                  {
+                  $API_About = $Body;
+                  }
+
   							$API_Name_Slug = PrepareFileName($API_Name);
   							//echo " -- API-Name " . $API_Name . "<br />";
+
   							$Website_URL = trim($APIRow['Website_URL']);
+                if($Website_URL = '')
+                  {
+                  $Website_URL = $url;
+                  }
   							$Swagger_URL = trim($APIRow['Swagger_URL']);
   							$Documentation_URL = trim($APIRow['Documentation_URL']);
   							$SDKsIO_URL = trim($APIRow['SDKsIO_URL']);
@@ -271,7 +282,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
                   }
 
                 array_push($APIJSON['apis'], $API);
-
+                $API_Count ++ ;
                 }
 
       			$APIJSON['include'] = array();
@@ -285,8 +296,10 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
     				array_push($APIJSON['maintainers'], $Maintainer);
 
-            array_push($ReturnObject,$APIJSON);
-
+            if($API_Count>0)
+              {
+              array_push($ReturnObject,$APIJSON);
+              }
       			}
       		}
         }
@@ -294,7 +307,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
     }
 
   $app->response()->header("Content-Type", "application/json");
-  echo format_json(json_encode($ReturnObject));
+  echo stripslashes(format_json(json_encode($ReturnObject)));
   });
 
 ?>
