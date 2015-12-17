@@ -40,8 +40,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       $MasterAPIJSON['image'] = trim($project_image);
       }
 
-    $MasterAPIJSON['tags'] = $Tags;
-
     $MasterAPIJSON['created'] = date('Y-m-d');
     $MasterAPIJSON['modified'] = date('Y-m-d');
 
@@ -376,6 +374,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
         }
       }
     }
+
+  $MasterAPIJSON['tags'] = $Tags;
 
   $MasterAPIJSON['maintainers'] = array();
   $Maintainer = array();
