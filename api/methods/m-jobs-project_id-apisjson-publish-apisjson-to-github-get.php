@@ -61,8 +61,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			if(count($Organizations) > 0)
 				{
 
-        $toggle = 0;
-
 				foreach($Organizations as $Companys)
 					{
 
@@ -98,7 +96,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
       			$Company_Name_Slug = PrepareFileName($Company_Name);
 
-      			$API_JSON_URL = $project_subdomain . $Company_Name_Slug . "/apis.json";
+      			$API_JSON_URL = $project_subdomain . "/data/" . $Company_Name_Slug . "/apis.json";
 
       			$Body = $Details;
 
@@ -142,26 +140,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			$APIJSON['specificationVersion'] = "0.14";
 
       			$APIJSON['apis'] = array();
-
-      			$API = array();
-      			$API['name'] = $Company_Name;
-      			$API['description'] = $Body;
-      			$API['image'] = trim($photo);
-
-      			$API['humanURL'] = trim($url);
-
-      			if($Base_URL!='')
-      				{
-      				$API['baseURL'] = trim($Base_URL);
-      				}
-      			else
-      				{
-      				$API['baseURL'] = trim($url);
-      				}
-
-      			$API['tags'] = $Tags;
-
-      			$API['properties'] = array();
+            $APIJSON['x-common'] = array();
 
       			$CompanyURLQuery = "SELECT * FROM company_url WHERE Company_ID = " . $organization_id . " ORDER BY Name, Type";
       			//echo $CompanyURLQuery . "<br />";
@@ -210,41 +189,89 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       					$Link = array();
       					$Link['type'] = "X-" . $API_URL_Type_Slug;
       					$Link['url'] = trim($API_URL);
-      					array_push($API['properties'], $Link);
+      					array_push($APIJSON['x-common'], $Link);
 
       					}
       				}
 
-      			array_push($APIJSON['apis'], $API);
+              //
+              // APIs
+              //
+  						$APIQuery = "SELECT DISTINCT a.API_ID, a.Name, a.About,";
+  						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Website' LIMIT 1) AS Website_URL,";
+  						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL,";
+  						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Documentation' LIMIT 1) AS Documentation_URL,";
+  						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'SDKs.io' LIMIT 1) AS SDKsIO_URL";
+              $APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Base URL' LIMIT 1) AS Base_URL";
+  						$APIQuery .= " FROM api a";
+  						$APIQuery .= " JOIN company_api_pivot cap ON a.API_ID = cap.API_ID";
+  						$APIQuery .= " JOIN api_tag_pivot atp ON a.API_ID = atp.API_ID";
+  						$APIQuery .= " JOIN tags t ON atp.Tag_ID = t.Tag_ID";
+  						$APIQuery .= " WHERE cap.Company_ID = " . $organization_id . " AND t.Tag = '" . $thistag . "'";
+  						$APIQuery .= " ORDER BY a.Name";
+
+  						//echo $APIQuery . "<br /><br />";
+  						$APIResult = mysql_query($APIQuery) or die('Query failed: ' . mysql_error());
+  						while ($APIRow = mysql_fetch_assoc($APIResult))
+  							{
+
+  							$API_ID = $APIRow['API_ID'];
+  							$API_Name = $APIRow['Name'];
+                $API_About = $APIRow['About'];
+  							$API_Name_Slug = PrepareFileName($API_Name);
+  							//echo " -- API-Name " . $API_Name . "<br />";
+  							$Website_URL = trim($APIRow['Website_URL']);
+  							$Swagger_URL = trim($APIRow['Swagger_URL']);
+  							$Documentation_URL = trim($APIRow['Documentation_URL']);
+  							$SDKsIO_URL = trim($APIRow['SDKsIO_URL']);
+                $Base_URL = trim($APIRow['Base_URL']);
+
+                $API = array();
+          			$API['name'] = $API_Name;
+          			$API['description'] = $API_About;
+          			$API['image'] = trim($photo);
+
+          			$API['humanURL'] = trim($Website_URL);
+
+          			if($Base_URL!='')
+          				{
+          				$API['baseURL'] = trim($Base_URL);
+          				}
+          			else
+          				{
+          				$API['baseURL'] = trim($Website_URL);
+          				}
+
+          			$API['tags'] = $Tags;
+
+          			$API['properties'] = array();
+
+                if($Documentation_URL!='')
+                  {
+                  $Link = array();
+        					$Link['type'] = "x-documentation";
+        					$Link['url'] = trim($Documentation_URL);
+        					array_push($API['properties'], $Link);
+                  }
+
+                if($Swagger_URL!='')
+                  {
+                  $Link = array();
+        					$Link['type'] = "x-oadf";
+        					$Link['url'] = trim($Swagger_URL);
+        					array_push($API['properties'], $Link);
+                  }
+
+                if($SDKsIO_URL!='')
+                  {
+                  $Link = array();
+        					$Link['type'] = "x-sdks";
+        					$Link['url'] = trim($SDKsIO_URL);
+        					array_push($API['properties'], $Link);
+                  }
+                }
 
       			$APIJSON['include'] = array();
-
-    				$APIJSON['maintainers'] = array();
-
-    				$Maintainer = array();
-    				$Maintainer['FN'] = "Kin";
-    				$Maintainer['X-twitter'] = "apievangelist";
-    				$Maintainer['email'] = "kin@email.com";
-
-    				array_push($APIJSON['maintainers'], $Maintainer);
-
-    				$ReturnEachAPIJSON = stripslashes(format_json(json_encode($APIJSON)));
-
-    				$API['contact'] = array();
-    				$Contact = array();
-    				$Contact['FN'] = $Company_Name;
-    				if($Email_Address!='')
-    					{
-    					$Contact['email'] = trim(str_replace("mailto:","",$Email_Address));
-    					}
-
-    				if($twitter_url!='')
-    					{
-    					$Contact['X-twitter'] = $twitter_url;
-    					}
-    				array_push($API['contact'], $Contact);
-
-    				array_push($APIJSON['apis'], $API);
 
     				$APIJSON['maintainers'] = array();
 
