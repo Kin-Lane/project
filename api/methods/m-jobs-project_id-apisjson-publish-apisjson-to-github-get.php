@@ -134,12 +134,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
       			$Body = strip_tags($Body);
       			$Body = mysql_real_escape_string($Body);
 
-      			// Add Company As Include in Master APIs.json
-      			$APIJSON_Include = array();
-      			$APIJSON_Include['name'] = $Company_Name;
-      			$APIJSON_Include['url'] = $API_JSON_URL;
-            array_push($MasterAPIJSON['include'] , $APIJSON_Include);
-
       			// Begin Individual APIs.json
       			$APIJSON = array();
       			$APIJSON['name'] = trim($Company_Name);
@@ -332,6 +326,12 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
             if($API_Count>0)
               {
+              // Add Company As Include in Master APIs.json
+        			$APIJSON_Include = array();
+        			$APIJSON_Include['name'] = $Company_Name;
+        			$APIJSON_Include['url'] = $API_JSON_URL;
+              array_push($MasterAPIJSON['include'] , $APIJSON_Include);
+
               array_push($ReturnObject,$APIJSON);
 
               $company_content = stripslashes(prettyPrint(json_encode($APIJSON)));
