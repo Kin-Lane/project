@@ -240,12 +240,12 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 							$row .= '' . $API_Name . '';
 							$row .= '</td>' . chr(10);
 
-							$row .= '<td width="50" align="center">' . chr(10);
-							if($Website_URL!=='')
-								{
-								$row .= '<a href="' . $Website_URL . '" target="_blank" title="Website"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-home-icon.jpeg" width="25" /></a>';
-								}
-							$row .= '</td>' . chr(10);
+							//$row .= '<td width="50" align="center">' . chr(10);
+							//if($Website_URL!=='')
+							//	{
+							//	$row .= '<a href="' . $Website_URL . '" target="_blank" title="Website"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-home-icon.jpeg" width="25" /></a>';
+							//	}
+							//$row .= '</td>' . chr(10);
 
 							$row .= '<td width="50" align="center">' . chr(10);
 							if($Documentation_URL!=='')
@@ -278,7 +278,9 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 							$row .= '</td>' . chr(10);
 							$row .= '<td width="50" align="center">' . chr(10);
 							$row .= '</td>' . chr(10);
-
+							$row .= '<td width="50" align="center">' . chr(10);
+							$row .= '</td>' . chr(10);
+							
 							$row .= '</tr>' . chr(10);
 
 							$api_count++;
