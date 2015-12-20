@@ -235,8 +235,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 								}
 
 		    			//$row .= '<td align="center" width="50">' . chr(10);
-							//$row .= '</td>' . chr(10);
-							$row .= '<td align="left" style="font-size: 11px;">' . chr(10);
+							///$row .= '</td>' . chr(10);
+							$row .= '<td align="left" style="font-size: 11px; padding-left: 20px;">' . chr(10);
 							$row .= '' . $API_Name . '';
 							$row .= '</td>' . chr(10);
 
