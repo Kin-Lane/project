@@ -5,7 +5,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 	$host = $_SERVER['HTTP_HOST'];
 	$project_id = prepareIdIn($project_id,$host);
 
-	$ReturnHTML = '<table width="100%" border="0" cellpadding="1" cellspacing="1">';
+	$ReturnHTML = '<table width="100%" border="0" cellpadding="1" cellspacing="1" style="margin-left: 25px;">';
 
  	$request = $app->request();
  	$params = $request->params();
@@ -280,7 +280,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 							$row .= '</td>' . chr(10);
 							$row .= '<td width="50" align="center">' . chr(10);
 							$row .= '</td>' . chr(10);
-							
+
 							$row .= '</tr>' . chr(10);
 
 							$api_count++;
