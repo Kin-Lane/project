@@ -250,7 +250,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 							$row .= '<td width="50" align="center">' . chr(10);
 							if($Documentation_URL!=='')
 								{
-								$row .= '<a href="' . $Documentation_URL . '" target="_blank" title="Documentation"><img src="http://kinlane-productions.s3.amazonaws.com/api-evangelist-site/building-blocks/bw-list.png" width="25" /></a>';
+								//$row .= '<a href="' . $Documentation_URL . '" target="_blank" title="Documentation"><img src="http://kinlane-productions.s3.amazonaws.com/api-evangelist-site/building-blocks/bw-list.png" width="25" /></a>';
 								}
 							$row .= '</td>' . chr(10);
 
