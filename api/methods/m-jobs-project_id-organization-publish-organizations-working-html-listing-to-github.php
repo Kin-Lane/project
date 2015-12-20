@@ -105,12 +105,13 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 	    					$row = '<tr>' . chr(10);
 							}
 
-	    				$row .= '<td align="center" width="50">' . chr(10);
+	    				//$row .= '<td align="center" width="50">' . chr(10);
 
-	    				$row .= '<a href="' . $url . '" id="home-logo-link-' . $organization_id . '"><img src="' . $photo . '" width="70" align="left" style="padding: 15px;" /></a>' . chr(10);
+	    				//$row .= '<a href="' . $url . '" id="home-logo-link-' . $organization_id . '"><img src="' . $photo . '" width="70" align="left" style="padding: 15px;" /></a>' . chr(10);
 
-						$row .= '</td>' . chr(10);
-						$row .= '<td align="left">' . chr(10);
+							//$row .= '</td>' . chr(10);
+
+							$row .= '<td align="left">' . chr(10);
 
 	    				$row .= '<a href="' . $url . '" id="home-name-link-' . $organization_id . '" style="color: #000;"><strong>' . $Name . '</strong></a>' . chr(10);
 
@@ -121,8 +122,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 	    				if($url!='')
 	    					{
 	    					$row .= '<a href="' . $url . '" target="_blank" title="Website" id="home-icon-' . $organization_id . '"><img id="home-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-home-icon.jpeg" width="18" align="center" /></a>' . chr(10);
-							}
-						$row .= '</td>' . chr(10);
+								}
+							$row .= '</td>' . chr(10);
 
 	    				$row .= '<td width="50" align="center">';
 	    				if($portal_url!='')
