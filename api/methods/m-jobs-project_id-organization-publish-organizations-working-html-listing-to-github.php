@@ -5,7 +5,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 	$host = $_SERVER['HTTP_HOST'];
 	$project_id = prepareIdIn($project_id,$host);
 
-	$ReturnHTML = '<table width="100%" border="0" cellpadding="1" cellspacing="1" style="margin-left: 100px;">';
+	$ReturnHTML = '<table width="100%" border="0" cellpadding="1" cellspacing="1" style="margin-left: 50px;">';
 
  	$request = $app->request();
  	$params = $request->params();
