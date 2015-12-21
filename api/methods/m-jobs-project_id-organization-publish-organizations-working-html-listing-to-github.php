@@ -302,7 +302,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 			$ReturnHTML .= "</table>";
 
-			$Page_Name = "Companies - Working";
+			$Page_Name = "API Stack";
 
 			$PageHeader = file_get_contents("http://control.laneworks.net/admin/project/templates/page.html");
 			$PageHeader = str_replace("[Name]",chr(39).htmlentities($Page_Name, ENT_QUOTES).chr(39),$PageHeader);
@@ -313,12 +313,12 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			//$PageBody .= '</ul>';
 			//$PageBody = '<h1 class="title">' . $Page_Name . '</h1>';
 			//$PageBody = '<p>These are the organizations I am tracking on as part of my API research in this area.</p>';
-			$PageBody = '<p>Currently working with ' . $company_count . ' companies, in 223 areas, with ' . $api_count . ' APIs cataloged, and ' . $swagger_count . ' Swagger definitions.';
+			$PageBody = '<p>Currently working with ' . $company_count . ' companies, with ' . $api_count . ' APIs cataloged, and ' . $swagger_count . ' OADF files available.';
 
 			$company_content = "";
 			$company_content .= $PageHeader . chr(10);
-		    $company_content .= $PageBody . chr(10);
-		    $company_content .= $ReturnHTML . chr(10);
+		  $company_content .= $PageBody . chr(10);
+		  $company_content .= $ReturnHTML . chr(10);
 
 			}
 		}
