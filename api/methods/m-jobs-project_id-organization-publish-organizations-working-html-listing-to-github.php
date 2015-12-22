@@ -128,7 +128,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 	    				$row .= '<td width="50" align="center">';
 	    				if($portal_url!='')
 	    					{
-	    					$row .= '<a href="' . $portal_url . '" target="_blank" title="Portal" id="portal-icon-' . $organization_id . '"><img id="portal-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-portal-developers.jpg" width="20" align="center" /></a>' . chr(10);
+	    					$row .= '<a href="' . $portal_url . '" target="_blank" title="Portal" id="portal-icon-' . $organization_id . '"><img id="portal-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-portal-developers.jpg" width="23" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
 
@@ -175,7 +175,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 						$row .= '<td width="50" align="center">';
 						if($postman_url!='')
 							{
-	    					$row .= '<a href="' . $postman_url . '" target="_blank" title="Postman Collection" id="sdksio-icon-' . $organization_id . '"><img id="sdksio-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/building-blocks/x-postman.png" width="25" align="center" /></a>' . chr(10);
+	    					//$row .= '<a href="' . $postman_url . '" target="_blank" title="Postman Collection" id="sdksio-icon-' . $organization_id . '"><img id="sdksio-icon-img-' . $organization_id . '" src="https://s3.amazonaws.com/kinlane-productions/building-blocks/x-postman.png" width="25" align="center" /></a>' . chr(10);
 							}
 						$row .= '</td>' . chr(10);
 						$row .= '<td width="150" align="center" id="github-issue-' . $organization_id . '" style="font-size: 11px;">';
