@@ -261,7 +261,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 							$row .= '<td width="50" align="center">' . chr(10);
 							if($Swagger_URL!=='')
 								{
-								$row .= '<a href="' . $Swagger_URL . '" target="_blank" title="Swagger"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-swagger-round.png" width="25" /></a>';
+								$row .= '<a href="' . $Swagger_URL . '" target="_blank" title="OADF"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-swagger-round.png" width="25" /></a>';
 								//$row .= '<a href="/editor-swagger-json.html?swaggerurl=' . $Swagger_URL . '" target="_blank" title="Edit Swagger" style="font-size: 10px;">(edit)</a>';
 								$swagger_count++;
 								}
