@@ -313,7 +313,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			//$PageBody .= '</ul>';
 			//$PageBody = '<h1 class="title">' . $Page_Name . '</h1>';
 			//$PageBody = '<p>These are the organizations I am tracking on as part of my API research in this area.</p>';
-			$PageBody = '<p>Currently working with ' . $company_count . ' companies, with ' . $api_count . ' APIs cataloged, and ' . $swagger_count . ' OADF files available.';
+			$PageBody = '<p>Currently working with ' . $company_count . ' companies, with ' . $api_count . ' APIs cataloged, and ' . $swagger_count . ' OADF files available--you can access <a href="/apis.json">full APIs.json for this API collection</a> in the root of the website.</p>';
 
 			$company_content = "";
 			$company_content .= $PageHeader . chr(10);
