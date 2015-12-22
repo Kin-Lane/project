@@ -187,6 +187,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 						$APIQuery = "SELECT DISTINCT a.API_ID, a.Name,";
 						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Website' LIMIT 1) AS Website_URL,";
 						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Swagger' LIMIT 1) AS Swagger_URL,";
+						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'API Blueprint' LIMIT 1) AS API_Blueprint_URL,";
+						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Postman' LIMIT 1) AS Postman_URL,";
 						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'Documentation' LIMIT 1) AS Documentation_URL,";
 						$APIQuery .= " (SELECT URL from api_url WHERE API_ID = a.API_ID AND Type = 'SDKs.io' LIMIT 1) AS SDKsIO_URL";
 						$APIQuery .= " FROM api a";
@@ -222,6 +224,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 							$Website_URL = trim($APIRow['Website_URL']);
 							$Swagger_URL = trim($APIRow['Swagger_URL']);
+							$API_Blueprint_URL = trim($APIRow['API_Blueprint_URL']);
+							$Postman_URL = trim($APIRow['Postman_URL']);
 							$Documentation_URL = trim($APIRow['Documentation_URL']);
 							$SDKsIO_URL = trim($APIRow['SDKsIO_URL']);
 
@@ -264,15 +268,25 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 							$row .= '</td>' . chr(10);
 
 							$row .= '<td width="50" align="center">' . chr(10);
+							if($API_Blueprint_URL!=='')
+								{
+								$row .= '<a href="' . $API_Blueprint_URL . '" target="_blank" title="API Blueprint"><img src="https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-api-blueprint-icon.png" width="25" /></a>';
+								$swagger_count++;
+								}
+							$row .= '</td>' . chr(10);
+							$row .= '<td width="50" align="center">' . chr(10);
+							if($Postman_URL!=='')
+								{
+								$row .= '<a href="' . $Postman_URL . '" target="_blank" title="API Blueprint"><img src="https://s3.amazonaws.com/kinlane-productions/building-blocks/x-postman.png" width="25" /></a>';
+								$swagger_count++;
+								}
+							$row .= '</td>' . chr(10);
+							$row .= '<td width="50" align="center">' . chr(10);
 							if($SDKsIO_URL!=='')
 								{
 								$row .= '<a href="' . $SDKsIO_URL . '" target="_blank" title="Swagger"><img src="https://s3.amazonaws.com/kinlane-productions/api-evangelist/sdks-io/sdks-io-icon.png" width="25" /></a>';
 								$swagger_count++;
 								}
-							$row .= '</td>' . chr(10);
-							$row .= '<td width="50" align="center">' . chr(10);
-							$row .= '</td>' . chr(10);
-							$row .= '<td width="50" align="center">' . chr(10);
 							$row .= '</td>' . chr(10);
 							$row .= '<td width="50" align="center">' . chr(10);
 							$row .= '</td>' . chr(10);
