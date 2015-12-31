@@ -24,8 +24,7 @@ $app->post($route, function () use ($app){
 		$this_month = date('m');
 		$this_year = date('Y');
 		$table_name = "views_" . $this_year . "_" . $this_month;
-		console.log($table_name);
-
+		echo $table_name . chr(10);
 		$checkLikeTableQuery = "show tables from `stack_network_kinlane_project` like " . chr(34) . $table_name . chr(34);
 		$checkLikeTableResult = mysql_query($checkLikeTableQuery) or die('Query failed: ' . mysql_error());
 
