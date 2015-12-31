@@ -14,17 +14,41 @@ $app->post($route, function () use ($app){
 
 	echo $base_host . chr(10);
 
-	$CheckTagQuery = "SELECT ID FROM stack_network_kinlane_project.whitelist_host WHERE host = '" . $base_host . "'";
-	$CheckTagResults = mysql_query($CheckTagQuery) or die('Query failed: ' . mysql_error());
-	if($CheckTagResults && mysql_num_rows($CheckTagResults))
+	$hostquery = "SELECT ID FROM stack_network_kinlane_project.whitelist_host WHERE host = '" . $base_host . "'";
+	$hostresults = mysql_query($hostquery) or die('Query failed: ' . mysql_error());
+	if($hostresults && mysql_num_rows($hostresults))
 		{
-		$Tag = mysql_fetch_assoc($CheckTagResults);
-		$tag_id = $Tag['Tag_ID'];
+		$host = mysql_fetch_assoc($hostresults);
+		$host_id = $Tag['ID'];
 
 		$this_month = date('m');
-		$table_name = "views_" . $this_month;
+		$this_year = date('Y');
+		$table_name = "views_" . $this_year . "_" . $this_month;
 		console.log($table_name);
 
+		$checkLikeTableQuery = "show tables from `stack_network_kinlane_project` like " . chr(34) . $table_name . chr(34);
+		$checkLikeTableResult = mysql_query($checkLikeTableQuery) or die('Query failed: ' . mysql_error());
+
+		if($checkLikeTableResult && mysql_num_rows($checkLikeTableResult))
+		  {
+		  $checkLikeTableResult = mysql_fetch_assoc($checkLikeTableResult);
+		  }
+		else
+		  {
+		  $CreateTableQuery = "CREATE TABLE  `stack_network_kinlane_project`.`" . $table_name . "` (";
+		  $CreateTableQuery .= "`id` int(10) unsigned NOT NULL AUTO_INCREMENT,";
+			$CreateTableQuery .= "`host` varchar(100) DEFAULT NULL,";
+		  $CreateTableQuery .= "`view_date` datetime NOT NULL,";
+		  $CreateTableQuery .= "PRIMARY KEY (`track_id`)";
+		  $CreateTableQuery .= ") ENGINE=InnoDB DEFAULT CHARSET=latin1;  ";
+		  //echo "<br />" . $CreateTableQuery . "<br />";
+		  mysql_query($CreateTableQuery) or die('Query failed: ' . mysql_error());
+		  }
+
+		$view_date = date('Y-m-d H:i:s');
+		$query = "INSERT INTO " . $table_name . "(host,view_date) VALUES('" . mysql_real_escape_string($base_host) . "','" . mysql_real_escape_string($view_date) . "')";
+		//echo $query . "<br />";
+		mysql_query($query) or die('Query failed: ' . mysql_error());
 
 		}
 
