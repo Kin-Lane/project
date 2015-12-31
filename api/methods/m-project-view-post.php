@@ -25,6 +25,7 @@ $app->post($route, function () use ($app){
 		$this_year = date('Y');
 		$table_name = "views_" . $this_year . "_" . $this_month;
 		echo $table_name . chr(10);
+
 		$checkLikeTableQuery = "show tables from `stack_network_kinlane_project` like " . chr(34) . $table_name . chr(34);
 		$checkLikeTableResult = mysql_query($checkLikeTableQuery) or die('Query failed: ' . mysql_error());
 
@@ -38,7 +39,7 @@ $app->post($route, function () use ($app){
 		  $CreateTableQuery .= "`id` int(10) unsigned NOT NULL AUTO_INCREMENT,";
 			$CreateTableQuery .= "`host` varchar(100) DEFAULT NULL,";
 		  $CreateTableQuery .= "`view_date` datetime NOT NULL,";
-		  $CreateTableQuery .= "PRIMARY KEY (`d`)";
+		  $CreateTableQuery .= "PRIMARY KEY (`id`)";
 		  $CreateTableQuery .= ") ENGINE=InnoDB DEFAULT CHARSET=latin1;  ";
 		  //echo "<br />" . $CreateTableQuery . "<br />";
 		  mysql_query($CreateTableQuery) or die('Query failed: ' . mysql_error());
