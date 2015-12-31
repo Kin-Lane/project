@@ -3,6 +3,8 @@ require_once "m-project-get.php";
 
 require_once "m-project-post.php";
 
+require_once "m-project-view-post.php";
+
 require_once "m-project-tags-get.php";
 require_once "m-project-tags-tag-delete.php";
 
