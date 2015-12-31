@@ -6,13 +6,12 @@ $app->post($route, function () use ($app){
 
  	$request = $app->request();
  	$params = $request->params();
-	var_dump($_SERVER);
+
 	$HTTP_REFERER = $_SERVER['HTTP_REFERER'];
-	//echo $HTTP_REFERER . chr(10);
 	$base_url_array = parse_url($HTTP_REFERER);
 	$base_host = $base_url_array['host'];
 
-	echo $base_host . chr(10);
+	$results = 0;
 
 	$hostquery = "SELECT ID FROM stack_network_kinlane_project.whitelist_host WHERE host = '" . $base_host . "'";
 	$hostresults = mysql_query($hostquery) or die('Query failed: ' . mysql_error());
@@ -24,7 +23,6 @@ $app->post($route, function () use ($app){
 		$this_month = date('m');
 		$this_year = date('Y');
 		$table_name = "views_" . $this_year . "_" . $this_month;
-		echo $table_name . chr(10);
 
 		$checkLikeTableQuery = "show tables from `stack_network_kinlane_project` like " . chr(34) . $table_name . chr(34);
 		$checkLikeTableResult = mysql_query($checkLikeTableQuery) or die('Query failed: ' . mysql_error());
@@ -49,11 +47,12 @@ $app->post($route, function () use ($app){
 		$query = "INSERT INTO stack_network_kinlane_project." . $table_name . "(host,view_date) VALUES('" . mysql_real_escape_string($base_host) . "','" . mysql_real_escape_string($view_date) . "')";
 		//echo $query . "<br />";
 		mysql_query($query) or die('Query failed: ' . mysql_error());
-
+		$results = 1;
 		}
 
-	//$app->response()->header("Content-Type", "application/json");
-	//echo format_json(json_encode($ReturnObject));
+	$ReturnObject['results'] = $results;
+	$app->response()->header("Content-Type", "application/json");
+	echo format_json(json_encode($ReturnObject));
 
 	});
 ?>
