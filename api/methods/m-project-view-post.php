@@ -46,7 +46,7 @@ $app->post($route, function () use ($app){
 		  }
 
 		$view_date = date('Y-m-d H:i:s');
-		$query = "INSERT INTO " . $table_name . "(host,view_date) VALUES('" . mysql_real_escape_string($base_host) . "','" . mysql_real_escape_string($view_date) . "')";
+		$query = "INSERT INTO stack_network_kinlane_project." . $table_name . "(host,view_date) VALUES('" . mysql_real_escape_string($base_host) . "','" . mysql_real_escape_string($view_date) . "')";
 		//echo $query . "<br />";
 		mysql_query($query) or die('Query failed: ' . mysql_error());
 
