@@ -38,7 +38,7 @@ $app->post($route, function () use ($app){
 		  $CreateTableQuery .= "`id` int(10) unsigned NOT NULL AUTO_INCREMENT,";
 			$CreateTableQuery .= "`host` varchar(100) DEFAULT NULL,";
 		  $CreateTableQuery .= "`view_date` datetime NOT NULL,";
-		  $CreateTableQuery .= "PRIMARY KEY (`track_id`)";
+		  $CreateTableQuery .= "PRIMARY KEY (`d`)";
 		  $CreateTableQuery .= ") ENGINE=InnoDB DEFAULT CHARSET=latin1;  ";
 		  //echo "<br />" . $CreateTableQuery . "<br />";
 		  mysql_query($CreateTableQuery) or die('Query failed: ' . mysql_error());
