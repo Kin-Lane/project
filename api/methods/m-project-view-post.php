@@ -19,7 +19,7 @@ $app->post($route, function () use ($app){
 	if($hostresults && mysql_num_rows($hostresults))
 		{
 		$host = mysql_fetch_assoc($hostresults);
-		$host_id = $Tag['ID'];
+		$host_id = $host['ID'];
 
 		$this_month = date('m');
 		$this_year = date('Y');
