@@ -61,7 +61,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			if(count($BuildingBlockCategories) > 0)
 				{
 					
-				$Previous_Page = "";
+				$Previous_Page = "index.html";
 				$Next_Page = "";					
 				
 				$Category_Count = 0;
@@ -85,7 +85,6 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 					$BuildingBlockCategoryNameSlug = str_replace("/","-",$BuildingBlockCategoryName);
 					$BuildingBlockCategoryNameSlug = str_replace(" ","-",$BuildingBlockCategoryNameSlug);
 					$BuildingBlockCategoryNameSlug = strtolower($BuildingBlockCategoryNameSlug);					
-					$BuildingBlockCategoryDetails = "";
 					
 					$BuildingBlockCategory = $Value;
 						
@@ -112,6 +111,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 							$about = strip_tags($BuildingBlocks['about']);
 							$category_id = $BuildingBlocks['category_id'];
 							$category = $BuildingBlocks['category'];
+							$category_about = $BuildingBlocks['category_about'];
 							$image = $BuildingBlocks['image'];
 							$image_width = $BuildingBlocks['image_width'];
 							if($image_width=='' || $image_width==0){ $image_width = 100; }
@@ -157,8 +157,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 								$PageBody .= '</td>' . chr(10);							
 								$PageBody .= '</tr>' . chr(10);	
 								$PageBody .= '</table>' . chr(10);			
-								$PageBody .= '<p style="font-size: 22px; font-weight: bold;" align="center">{"' . $BuildingBlockCategoryName . '""}</p>' . chr(10); 
-								$PageBody .= '<p>' . $BuildingBlockCategoryDetails . '</p>' . chr(10);								
+								$PageBody .= '<p style="font-size: 22px; font-weight: bold;" align="center">{"' . $BuildingBlockCategoryName . '"}</p>' . chr(10); 
+								$PageBody .= '<p>' . $category_about . '</p>' . chr(10);								
 								$PageBody .= '<!-- Pagination links -->' . chr(10);
 								$PageBody .= '<div class="pagination">' . chr(10);
 								if($Previous_Page!='')

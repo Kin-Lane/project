@@ -21,6 +21,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 		$Project = mysql_fetch_assoc($ProjectResults);
 		$project_title = $Project['Title'];
 		$project_summary = $Project['Summary'];
+		$project_github_user = $Project['Github_User'];
 		$project_github_repo = $Project['Github_Repo'];
 		$project_subdomain = $Project['Subdomain'];
 		$project_type = $Project['Type'];
@@ -148,7 +149,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			$GitHubClient = new GitHubClient();
 			$GitHubClient->setCredentials($guser,$gpass);
 
-			$owner = 'kinlane';
+			$owner = $project_github_user;
 			$ref = "gh-pages";
 
 			try
@@ -160,18 +161,21 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 				$sha = $CheckFile->getsha();
 
 				$message = "Updating " . $write_tool_file . " via Laneworks CMS Publish";
+				//echo $message . "<br />";
 				$content = base64_encode($company_content);
 
 				$updateFile = $GitHubClient->repos->contents->updateFile($owner, $project_github_repo, $write_tool_file, $message, $content, $sha, $ref);
+				//print_r($updateFile);
 				}
 			catch (Exception $e)
 				{
 
 				$message = "Adding " . $write_tool_file . " via Laneworks CMS Publish";
+				//echo $message . "<br />";
 				$content = base64_encode($company_content);
 
 				$updateFile = $GitHubClient->repos->contents->createFile($owner, $project_github_repo, $write_tool_file, $message, $content, $ref);
-
+				//print_r($updateFile);
 				}
 
 			}
