@@ -107,12 +107,14 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 				$owner = $project_github_user;
 				$ref = "gh-pages";
 
-				$ReturnObject['title'] = $Blog_Title;
-				$ReturnObject['url'] = $Post_Link;
-				$ReturnObject['domain'] = $Domain;
-				$ReturnObject['image'] = $Feature_Image;
-				$ReturnObject['file'] = $blog_store_file;
-
+				$B = array();
+				$B['title'] = $Blog_Title;
+				$B['url'] = $Post_Link;
+				$B['domain'] = $Domain;
+				$B['image'] = $Feature_Image;
+				$B['file'] = $blog_store_file;
+				array_push($ReturnObject,$B);
+				
 				try
 					{
 					$CheckFile = $GitHubClient->repos->contents->getContents($owner, $project_github_repo, $ref, $blog_store_file);
@@ -122,6 +124,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 					$sha = $CheckFile->getsha();
 
 					$message = "Updating " . $blog_store_file . " via Laneworks Publish";
+					//echo $message . "<br />";
 					$content = base64_encode($WriteBlogContent);
 					$updateFile = $GitHubClient->repos->contents->updateFile($owner, $project_github_repo, $blog_store_file, $message, $content, $sha, $ref);
 					}
@@ -129,10 +132,11 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 					{
 					$message = "Adding " . $blog_store_file . " via Laneworks Publish";
 					$content = base64_encode($WriteBlogContent);
-
+					//echo $message . "<br />";
 					$updateFile = $GitHubClient->repos->contents->createFile($owner, $project_github_repo, $blog_store_file, $message, $content, $ref);
 
 					}
+					
 				}
 			}
 		}

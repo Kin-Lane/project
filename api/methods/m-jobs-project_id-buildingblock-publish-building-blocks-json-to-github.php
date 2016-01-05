@@ -20,6 +20,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 		$Project = mysql_fetch_assoc($ProjectResults);
 		$project_title = $Project['Title'];
 		$project_summary = $Project['Summary'];
+		$project_github_user = $Project['Github_User'];
 		$project_github_repo = $Project['Github_Repo'];
 		$project_subdomain = $Project['Subdomain'];
 		$project_type = $Project['Type'];
@@ -99,7 +100,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			$GitHubClient = new GitHubClient();
 			$GitHubClient->setCredentials($guser,$gpass);
 
-			$owner = 'kinlane';
+			$owner = $project_github_user;
 			$ref = "gh-pages";
 
 			try
