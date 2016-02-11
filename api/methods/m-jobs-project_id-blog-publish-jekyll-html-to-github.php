@@ -9,6 +9,10 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
  	$request = $app->request();
  	$params = $request->params();
+	
+	if(isset($_REQUEST['override'])){ $override = $params['override']; } else { $override = 0; }
+	if(isset($_REQUEST['start'])){ $start = $params['start']; } else { $start = 0; }
+	if(isset($_REQUEST['finish'])){ $finish = $params['finish']; } else { $finish = 25; }
 
 	//echo $project_id;
 
@@ -40,7 +44,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 			$page = 0;
 			$count = 0;
-			$url = "http://blog.api.kinlane.com/blog/tags/" . urlencode($thistag) . "/build/?appid=" . $appid . "&appkey=" . $appkey;
+			$url = "http://blog.api.kinlane.com/blog/tags/" . urlencode($thistag) . "/build/?appid=" . $appid . "&appkey=" . $appkey . "&override=" . $override . "&start=" . $start . "&finish=" . $finish;
 			//echo $url . "<br />";
 
 			$http = curl_init();
@@ -86,11 +90,10 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 				$Host = parse_url($Post_Link);
 				$Domain = $Host['host'];
 
-				$PageHeader = file_get_contents("http://control.laneworks.net/admin/project/templates/blog3.html");
+				$PageHeader = file_get_contents("http://control.laneworks.net/admin/project/templates/blog6.html");
 
-				$PageHeader = str_replace("[Title]",chr(39).htmlentities($Blog_Title, ENT_QUOTES).chr(39),$PageHeader);
+				$PageHeader = str_replace("[Title]",htmlentities($Blog_Title, ENT_QUOTES),$PageHeader);
 				$PageHeader = str_replace("[Image]",$Feature_Image,$PageHeader);
-				$PageHeader = str_replace("[URL]",$Post_Link,$PageHeader);
 				$PageHeader = str_replace("[Source]",$Post_Link,$PageHeader);
 				$PageHeader = str_replace("[Domain]",$Domain,$PageHeader);
 

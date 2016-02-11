@@ -10,6 +10,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
  	$request = $app->request();
  	$params = $request->params();
 
+	if(isset($_REQUEST['override'])){ $override = $params['override']; } else { $override = 0; }
+
 	//echo $project_id;
 
 	$ProjectQuery = "SELECT * FROM project WHERE Project_ID = " . $project_id;
@@ -39,7 +41,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 			$page = 0;
 			$count = 0;
-			$url = "http://news.api.kinlane.com/news/tags/" . urlencode($thistag) . "/build/?appid=" . $appid . "&appkey=" . $appkey;
+			$url = "http://news.api.kinlane.com/news/tags/" . urlencode($thistag) . "/build/?appid=" . $appid . "&appkey=" . $appkey . "&override=" . $override;
 			//echo $url . "<br />";
 
 			$http = curl_init();
@@ -85,13 +87,13 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 				$Host = parse_url($Post_Link);
 				$Domain = $Host['host'];
 
-				$PageHeader = file_get_contents("http://control.laneworks.net/admin/project/templates/blog3.html");
+				$PageHeader = file_get_contents("http://control.laneworks.net/admin/project/templates/blog5.html");
 
 				$PageHeader = str_replace("[Title]",chr(39).htmlentities($News_Title, ENT_QUOTES).chr(39),$PageHeader);
 				$PageHeader = str_replace("[Image]",$Feature_Image,$PageHeader);
-				$PageHeader = str_replace("[URL]",$Post_Link,$PageHeader);
-				$PageHeader = str_replace("[Source]",$Post_Link,$PageHeader);
-				$PageHeader = str_replace("[Domain]",$Domain,$PageHeader);
+				//$PageHeader = str_replace("[URL]",$Post_Link,$PageHeader);
+				//$PageHeader = str_replace("[Source]",$Post_Link,$PageHeader);
+				//$PageHeader = str_replace("[Domain]",$Domain,$PageHeader);
 
 				$NewsFileName = $Post_Year . "-" . $Post_Month . "-" . $Post_Day . "-" . $Prep_Title . ".html";
 

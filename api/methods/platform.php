@@ -13,10 +13,12 @@ require_once "m-project-tags-tag-project-get.php";
 require_once "m-jobs-project_id-apisjson-publish-apisjson-to-github-get.php";
 
 require_once "m-jobs-project_id-blog-publish-jekyll-html-to-github.php";
+require_once "m-jobs-project_id-blog-publish-jekyll-html-to-local-github.php";
 
 require_once "m-jobs-project_id-news-publish-jekyll-html-to-github.php";
 
 require_once "m-jobs-project_id-curated-publish-curated-html-to-github.php";
+require_once "m-jobs-project_id-curated-publish-jekyll-html-to-local-github.php";
 
 require_once "m-jobs-project_id-organization-publish-organizations-html-to-github.php";
 

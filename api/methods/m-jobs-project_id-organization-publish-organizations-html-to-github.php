@@ -288,7 +288,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 				$name = $CheckFile->getname();
 				$content = base64_decode($CheckFile->getcontent());
 				$sha = $CheckFile->getsha();
-
+				//echo $write_company_file . "<br />";
 				$message = "Updating " . $write_company_file . " via Laneworks CMS Publish";
 				$content = base64_encode($company_content);
 

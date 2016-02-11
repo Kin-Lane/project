@@ -139,7 +139,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			$PageHeader = file_get_contents("http://control.laneworks.net/admin/project/templates/page.html");
 			$PageHeader = str_replace("[Name]",chr(39).htmlentities($Page_Name, ENT_QUOTES).chr(39),$PageHeader);
 
-			$PageBody = '<p>These are the common building blocks I have pullled from my research so far.';
+			$PageBody = '<p>These are some of the common building blocks I have pullled from my research into this layer of the API space.</p>';
 
 			$company_content = $PageHeader . chr(10) . $PageBody . chr(10) . $ReturnHTML;
 

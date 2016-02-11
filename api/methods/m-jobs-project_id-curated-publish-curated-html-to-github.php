@@ -11,6 +11,8 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
  	$request = $app->request();
  	$params = $request->params();
 
+	if(isset($_REQUEST['override'])){ $override = $params['override']; } else { $override = 0; }
+
 	//echo $project_id;
 
 	$ProjectQuery = "SELECT * FROM project WHERE Project_ID = " . $project_id;
@@ -42,7 +44,7 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 			//echo $thistag . "<br />";
 			$page = 0;
 			$count = 0;
-			$url = "http://curated.api.kinlane.com/curated/tags/" . urlencode($thistag) . "/build/?appid=" . $appid . "&appkey=" . $appkey;
+			$url = "http://curated.api.kinlane.com/curated/tags/" . urlencode($thistag) . "/build/?appid=" . $appid . "&appkey=" . $appkey . "&override=" . $override;
 			//echo $url . "<br />";
 
 			$http = curl_init();
@@ -62,6 +64,10 @@ $app->get($route, function ($project_id)  use ($app,$appid,$appkey,$guser,$gpass
 
 				$curated_id = $CuratedPost['curated_id'];
 				$curated_title = $CuratedPost['title'];
+				$curated_title = str_replace("Â·","",$curated_title);
+				$curated_title = str_replace("â€™","",$curated_title);
+				$curated_title = trim($curated_title);
+
 				$curated_link = $CuratedPost['link'];
 				$curated_image = $CuratedPost['screenshot_url'];
 				$github_build = $CuratedPost['github_build'];
