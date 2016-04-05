@@ -1,811 +1,244 @@
 {
 	"swagger": "2.0",
 	"info": {
-		"title": "Curated",
-		"description": "This is my API for curated my API news from across the Internet. These are stories I've flagged as important after reading blog feeds, Twitter, Reddit, and numerous other sources.",
-		"termsOfService": "http://kinlane.com/terms-of-service.html",
-		"version": "v1"
+		"title": "Project",
+		"description": "This is an project for all my projects. I use a single project system to manage all my sites. Based upon tagging, I then publish each post out to its respective Github Page based repo.",
+		"termsOfService": "http://stack.network/terms-of-service.html",
+		"version": null
 	},
-	"host": "curated.api.kinlane.com",
+	"host": "project.api.kinlane.com",
 	"basePath": "/",
 	"schemes": ["http"],
 	"produces": ["application/json"],
 	"consumes": ["application/json"],
 	"paths": {
-		"/curated/": {
+		"/project/": {
 			"get": {
-				"summary": "retrieves all curated items",
-				"description": "retrieves all curated items",
-				"operationId": "getCurated",
+				"summary": "all projects",
+				"description": "all projects",
+				"operationId": "getProjects",
 				"parameters": [{
 					"in": "query",
 					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
+					"description": "your appid for accessing the project"
 				},
 				{
 					"in": "query",
 					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
+					"description": "your appkey for accessing the project"
+				},
+				{
+					"in": "query",
+					"name": "count",
+					"description": "how many to show on page"
+				},
+				{
+					"in": "query",
+					"name": "page",
+					"description": "which page of results to show"
 				},
 				{
 					"in": "query",
 					"name": "query",
-					"description": "a text query to search across curated items",
-					"type": "string",
-					"format": "string"
+					"description": "a text query to search across project"
+				},
+				{
+					"in": "query",
+					"name": "sort",
+					"description": "which field to sort by"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK"
 					}
 				},
-				"tags": ["Curated"],
+				"tags": ["Projects"],
 				"security": []
 			},
 			"post": {
-				"summary": "add curated",
-				"description": "add curated",
-				"operationId": "addCurated",
+				"summary": "add a project post",
+				"description": "add a project post",
+				"operationId": "addProject",
 				"parameters": [{
 					"in": "query",
 					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
+					"description": "your appid for accessing the project"
 				},
 				{
 					"in": "query",
 					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
+					"description": "your appkey for accessing the project"
 				},
 				{
 					"in": "query",
-					"name": "author",
-					"description": "author of the curated item",
-					"type": "string",
-					"format": "string"
+					"name": "github_repo",
+					"description": "github repo for the project"
 				},
 				{
 					"in": "query",
-					"name": "details",
-					"description": "raw details of the curated item",
-					"type": "string",
-					"format": "string"
+					"name": "image",
+					"description": "image for the project"
 				},
 				{
 					"in": "query",
-					"name": "domain",
-					"description": "domain of the curated item",
-					"type": "string",
-					"format": "string"
+					"name": "image_width",
+					"description": "width of the project image"
 				},
 				{
 					"in": "query",
-					"name": "item_date",
-					"description": "date applied to the curated item",
-					"type": "string",
-					"format": "string"
+					"name": "subdomain",
+					"description": "subdomain for the project"
 				},
 				{
 					"in": "query",
-					"name": "link",
-					"description": "url for the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "original_date",
-					"description": "original date of the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "processed",
-					"description": "has the curated item been processed",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "public_comment",
-					"description": "public comment on the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "resolved_url",
-					"description": "resolved url for the item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "screenshot_url",
-					"description": "screenshot url for the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "status",
-					"description": "status of the curated item",
-					"type": "string",
-					"format": "string"
+					"name": "summary",
+					"description": "summary of the project"
 				},
 				{
 					"in": "query",
 					"name": "title",
-					"description": "title of the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "weekly_roundup",
-					"description": "is curated included in weekly roundup",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "weekly_summary",
-					"description": "is curated item included in weekly summary",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Curated"],
-				"security": []
-			}
-		},
-		"/curated/byweek/": {
-			"get": {
-				"summary": "curated items by week",
-				"description": "curated items by week",
-				"operationId": "getCuratedByWeek",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "week",
-					"description": "the week number",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Curated"],
-				"security": []
-			}
-		},
-		"/curated/byweek/archive/": {
-			"get": {
-				"summary": "curated items by week archived",
-				"description": "curated items by week archived",
-				"operationId": "getCuratedByWeekPublished",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "week",
-					"description": "the week number",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Curated"],
-				"security": []
-			}
-		},
-		"/curated/byweek/published/": {
-			"get": {
-				"summary": "curated items by week published",
-				"description": "curated items by week published",
-				"operationId": "getCuratedByWeekPublished",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "week",
-					"description": "the week number",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Curated"],
-				"security": []
-			}
-		},
-		"/curated/byweek/review/": {
-			"get": {
-				"summary": "curated item by week for review",
-				"description": "curated item by week for review",
-				"operationId": "getCuratedByWeekReview",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "week",
-					"description": "the week number",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Curated"],
-				"security": []
-			}
-		},
-		"/curated/tags/": {
-			"get": {
-				"summary": "retrieves all tags for curated",
-				"description": "retrieves all tags for curated",
-				"operationId": "getCuratedTags",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "query",
-					"description": "a text query to search across curated items",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Tags"],
-				"security": []
-			}
-		},
-		"/curated/tags/byweek/": {
-			"get": {
-				"summary": "curated tags by week",
-				"description": "curated tags by week",
-				"operationId": "getCuratedTagsByWeek",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "week",
-					"description": "the week to retrieve tags by",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Tags"],
-				"security": []
-			}
-		},
-		"/curated/tags/byweek/{tag}/curated/": {
-			"get": {
-				"summary": "curated by tag and week",
-				"description": "curated by tag and week",
-				"operationId": "getCuratedTagCurated",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "path",
-					"name": "tag",
-					"description": "the tag to filter by",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "week",
-					"description": "the week to filter by, defaults to this week",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Tags"],
-				"security": []
-			}
-		},
-		"/curated/tags/{tag}": {
-			"delete": {
-				"summary": "delete curated tag",
-				"description": "delete curated tag",
-				"operationId": "deleteCuratedTag",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "path",
-					"name": "tag",
-					"description": "Tag to be removed",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Tags"],
-				"security": []
-			}
-		},
-		"/curated/{curated_id}": {
-			"delete": {
-				"summary": "delete a curated item",
-				"description": "delete a curated item",
-				"operationId": "deleteCurated",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "path",
-					"name": "curated_id",
-					"description": "id for the curated item",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Curated"],
-				"security": []
-			},
-			"get": {
-				"summary": "retrieve a curated item",
-				"description": "retrieve a curated item",
-				"operationId": "getCurated",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "path",
-					"name": "curated_id",
-					"description": "id for the curated id",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Curated"],
-				"security": []
-			},
-			"put": {
-				"summary": "updatea a curated item",
-				"description": "updatea a curated item",
-				"operationId": "updateCurated",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "author",
-					"description": "author of the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "path",
-					"name": "curated_id",
-					"description": "id of the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "details",
-					"description": "raw details of the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "domain",
-					"description": "domain of the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "item_date",
-					"description": "date applied to the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "link",
-					"description": "url for the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "original_date",
-					"description": "original date of the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "processed",
-					"description": "has the curated item been processed",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "public_comment",
-					"description": "public comment on the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "resolved_url",
-					"description": "resolved url for the item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "screenshot_url",
-					"description": "screenshot url for the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "status",
-					"description": "status of the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "title",
-					"description": "title of the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "weekly_roundup",
-					"description": "is curated included in weekly roundup",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "weekly_summary",
-					"description": "is curated item included in weekly summary",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Curated"],
-				"security": []
-			}
-		},
-		"/curated/{curated_id}/notes/": {
-			"get": {
-				"summary": "get curated items notes",
-				"description": "get curated items notes",
-				"operationId": "getCuratedNotes",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "path",
-					"name": "curated_id",
-					"description": "id for the curated item",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Notes"],
-				"security": []
-			},
-			"post": {
-				"summary": "add a curated note",
-				"description": "add a curated note",
-				"operationId": "addCuratedNote",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "path",
-					"name": "curated_id",
-					"description": "id for the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "note",
-					"description": "the full text of note",
-					"type": "string",
-					"format": "string"
+					"description": "ttle for the project"
 				},
 				{
 					"in": "query",
 					"name": "type",
-					"description": "type of the note",
-					"type": "string",
-					"format": "string"
+					"description": "type of the project"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK"
 					}
 				},
-				"tags": ["Notes"],
+				"tags": ["Projects"],
 				"security": []
 			}
 		},
-		"/curated/{curated_id}/notes/{note_id}": {
-			"delete": {
-				"summary": "delete a curated note",
-				"description": "delete a curated note",
-				"operationId": "deleteCuratedNote",
-				"parameters": [{
-					"in": "query",
-					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "query",
-					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "path",
-					"name": "curated_id",
-					"description": "id for the curated item",
-					"type": "string",
-					"format": "string"
-				},
-				{
-					"in": "path",
-					"name": "note_id",
-					"description": "id for the note",
-					"type": "string",
-					"format": "string"
-				}],
-				"responses": {
-					"200": {
-						"description": "OK"
-					}
-				},
-				"tags": ["Notes"],
-				"security": []
-			}
-		},
-		"/curated/{curated_id}/tags/": {
+		"/project/byweek/": {
 			"get": {
-				"summary": "get curated tags",
-				"description": "get curated tags",
-				"operationId": "getCuratedTags",
+				"summary": "projects by week",
+				"description": "projects by week",
+				"operationId": "getProjectsByWeek",
 				"parameters": [{
 					"in": "query",
 					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
+					"description": "your appid for accessing the project"
 				},
 				{
 					"in": "query",
 					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
+					"description": "your appkey for accessing the project"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"tags": ["Projects"],
+				"security": []
+			}
+		},
+		"/project/draft/": {
+			"get": {
+				"summary": "draft projects",
+				"description": "draft projects",
+				"operationId": "getDraftProjects",
+				"parameters": [{
+					"in": "query",
+					"name": "appid",
+					"description": "your appid for accessing the project"
 				},
 				{
-					"in": "path",
-					"name": "curated_id",
-					"description": "id for curated item",
-					"type": "string",
-					"format": "string"
+					"in": "query",
+					"name": "appkey",
+					"description": "your appkey for accessing the project"
+				},
+				{
+					"in": "query",
+					"name": "count",
+					"description": "how many to show on page"
+				},
+				{
+					"in": "query",
+					"name": "page",
+					"description": "which page of results to show"
+				},
+				{
+					"in": "query",
+					"name": "sort",
+					"description": "which field to sort by"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"tags": ["Projects"],
+				"security": []
+			}
+		},
+		"/project/published/": {
+			"get": {
+				"summary": "published projects",
+				"description": "published projects",
+				"operationId": "getPublishedProjects",
+				"parameters": [{
+					"in": "query",
+					"name": "appid",
+					"description": "your appid for accessing the project"
+				},
+				{
+					"in": "query",
+					"name": "appkey",
+					"description": "your appkey for accessing the project"
+				},
+				{
+					"in": "query",
+					"name": "count",
+					"description": "how many to show on page"
+				},
+				{
+					"in": "query",
+					"name": "page",
+					"description": "which page of results to show"
+				},
+				{
+					"in": "query",
+					"name": "sort",
+					"description": "which field to sort by"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"tags": ["Projects"],
+				"security": []
+			}
+		},
+		"/project/tags/byweek/": {
+			"get": {
+				"summary": "project tags by week",
+				"description": "project tags by week",
+				"operationId": "getProjectTagsByWeek",
+				"parameters": [{
+					"in": "query",
+					"name": "appid",
+					"description": "your appid for accessing the project"
+				},
+				{
+					"in": "query",
+					"name": "appkey",
+					"description": "your appkey for accessing the project"
+				},
+				{
+					"in": "query",
+					"name": "week",
+					"description": "the week to retrieve tags by"
+				},
+				{
+					"in": "query",
+					"name": "year",
+					"description": "the year to retrieve tags by"
 				}],
 				"responses": {
 					"200": {
@@ -813,178 +246,299 @@
 					}
 				},
 				"tags": ["Tags"],
+				"security": []
+			}
+		},
+		"/project/tags/byweek/{tag}/project/": {
+			"get": {
+				"summary": "project tags by week projects",
+				"description": "project tags by week projects",
+				"operationId": "getProjectTagCProject",
+				"parameters": [{
+					"in": "path",
+					"name": "tag",
+					"description": "the tag to filter by"
+				},
+				{
+					"in": "query",
+					"name": "week",
+					"description": "the week to filter by, defaults to this week"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"tags": ["Tags"],
+				"security": []
+			}
+		},
+		"/project/{project_id}/": {
+			"delete": {
+				"summary": "delete project",
+				"description": "delete project",
+				"operationId": "deleteProject",
+				"parameters": [{
+					"in": "query",
+					"name": "appid",
+					"description": "your appid for accessing the project"
+				},
+				{
+					"in": "query",
+					"name": "appkey",
+					"description": "your appkey for accessing the project"
+				},
+				{
+					"in": "path",
+					"name": "project_id",
+					"description": "the unique id for project entry"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"tags": ["Projects"],
+				"security": []
+			},
+			"get": {
+				"summary": "Retrieve a project using its slug",
+				"description": "Returns the project detail",
+				"operationId": "getProject",
+				"parameters": [{
+					"in": "query",
+					"name": "appid",
+					"description": "your appid for accessing the project"
+				},
+				{
+					"in": "query",
+					"name": "appkey",
+					"description": "your appkey for accessing the project"
+				},
+				{
+					"in": "path",
+					"name": "project_id",
+					"description": "the unique id for project entry"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"tags": ["Projects"],
+				"security": []
+			},
+			"put": {
+				"summary": "update project",
+				"description": "update project",
+				"operationId": "updateProject",
+				"parameters": [{
+					"in": "query",
+					"name": "appid",
+					"description": "your appid for accessing the project"
+				},
+				{
+					"in": "query",
+					"name": "appkey",
+					"description": "your appkey for accessing the project"
+				},
+				{
+					"in": "query",
+					"name": "github_repo",
+					"description": "github repo for the project"
+				},
+				{
+					"in": "query",
+					"name": "image",
+					"description": "image for the project"
+				},
+				{
+					"in": "query",
+					"name": "image_width",
+					"description": "width of the project image"
+				},
+				{
+					"in": "path",
+					"name": "project_id",
+					"description": "the unique id for project entry"
+				},
+				{
+					"in": "query",
+					"name": "subdomain",
+					"description": "subdomain for the project"
+				},
+				{
+					"in": "query",
+					"name": "summary",
+					"description": "summary of the project"
+				},
+				{
+					"in": "query",
+					"name": "title",
+					"description": "ttle for the project"
+				},
+				{
+					"in": "query",
+					"name": "type",
+					"description": "type of the project"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"tags": ["Projects"],
+				"security": []
+			}
+		},
+		"/project/{project_id}/tags/": {
+			"get": {
+				"summary": "project tags",
+				"description": "project tags",
+				"operationId": "getprojectTags",
+				"parameters": [{
+					"in": "query",
+					"name": "appid",
+					"description": "your appid for accessing the project"
+				},
+				{
+					"in": "query",
+					"name": "appkey",
+					"description": "your appkey for accessing the project"
+				},
+				{
+					"in": "path",
+					"name": "project_id",
+					"description": "id for project"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"tags": ["Projects"],
 				"security": []
 			},
 			"post": {
-				"summary": "add curated tag",
-				"description": "add curated tag",
-				"operationId": "addCuratedTag",
+				"summary": "add tag to project",
+				"description": "add tag to project",
+				"operationId": "addProjectTag",
 				"parameters": [{
 					"in": "query",
 					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
+					"description": "your appid for accessing the project"
 				},
 				{
 					"in": "query",
 					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
+					"description": "your appkey for accessing the project"
 				},
 				{
 					"in": "path",
-					"name": "curated_id",
-					"description": "id for curated item",
-					"type": "string",
-					"format": "string"
+					"name": "project_id",
+					"description": "id for the project"
 				},
 				{
 					"in": "query",
 					"name": "tag",
-					"description": "tag name",
-					"type": "string",
-					"format": "string"
+					"description": "tag name"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK"
 					}
 				},
-				"tags": ["Tags"],
+				"tags": ["Projects"],
 				"security": []
 			}
 		},
-		"/curated/{curated_id}/tags/{tag}": {
+		"/project/{project_id}/tags/{tag}": {
 			"delete": {
-				"summary": "delete a curated item",
-				"description": "delete a curated item",
-				"operationId": "deleteCurated",
+				"summary": "delete project tag",
+				"description": "delete project tag",
+				"operationId": "deleteprojectTag",
 				"parameters": [{
 					"in": "query",
 					"name": "appid",
-					"description": "your appid for accessing the API",
-					"type": "string",
-					"format": "string"
+					"description": "your appid for accessing the project"
 				},
 				{
 					"in": "query",
 					"name": "appkey",
-					"description": "your appkey for accessing the API",
-					"type": "string",
-					"format": "string"
+					"description": "your appkey for accessing the project"
 				},
 				{
 					"in": "path",
-					"name": "curated_id",
-					"description": "id for the curated item",
-					"type": "string",
-					"format": "string"
+					"name": "project_id",
+					"description": "id for the project"
 				},
 				{
 					"in": "path",
 					"name": "tag",
-					"description": "tag to upate on the curated item",
-					"type": "string",
-					"format": "string"
+					"description": "tag to remove from project"
 				}],
 				"responses": {
 					"200": {
 						"description": "OK"
 					}
 				},
-				"tags": ["Tags"],
+				"tags": ["Projects"],
 				"security": []
 			}
 		}
 	},
-	"definitions": [{
-		"properties": {
-			"curated_id": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"title": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"link": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"item_date": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"details": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"status": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"public_comment": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"original_date": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"author": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"processed": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"domain": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"screenshot_url": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"resolved_url": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"weekly_summary": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"weekly_roundup": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"tag_id": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"tag": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"curated_count": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"note_id": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"type": {
-				"description": "This is a default description.",
-				"type": "get"
-			},
-			"note": {
-				"description": "This is a default description.",
-				"type": "get"
+	"definitions": {
+		"project": {
+			"properties": {
+				"project_id": {
+					"description": "This is a default description.",
+					"type": "get"
+				},
+				"title": {
+					"description": "This is a default description.",
+					"type": "get"
+				},
+				"summary": {
+					"description": "This is a default description.",
+					"type": "get"
+				},
+				"github_repo": {
+					"description": "This is a default description.",
+					"type": "get"
+				},
+				"subdomain": {
+					"description": "This is a default description.",
+					"type": "get"
+				},
+				"type": {
+					"description": "This is a default description.",
+					"type": "get"
+				},
+				"image": {
+					"description": "This is a default description.",
+					"type": "get"
+				},
+				"image_width": {
+					"description": "This is a default description.",
+					"type": "get"
+				}
+			}
+		},
+		"tag": {
+			"properties": {
+				"tag_id": {
+					"description": "This is a default description.",
+					"type": "get"
+				},
+				"tag": {
+					"description": "This is a default description.",
+					"type": "get"
+				},
+				"api_count": {
+					"description": "This is a default description.",
+					"type": "get"
+				}
 			}
 		}
-	}]
+	}
 }
