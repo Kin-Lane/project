@@ -1,29 +1,26 @@
-- name: Curated API
-  description: As I look through the thousands of tweets, blog posts, and other items
-    I read from across the API space, I curate them as part of my regular research.
-    I put them into each research bucket, and make them availble via each reserch
-    project. You can access via this API, and use in real-time as I curate and manage
-    each week.
-  image: https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-abundance.png
+- name: Kin Lane Project API
+  description: Each of my websites, and API research projects run as individual projects.
+    I am currently pushing forward over 200 seprate projects, which range from API
+    design, to US government open data. I use this project API to allow me to organize
+    project details, and publish the results to Github repos, white papers, and other
+    destinations. This API provides me a single window to work with all my API projects,
+    and the content, code, and data that go into them.
+  image: https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-project.png
   x-open-ranking: "0"
   tags:
-  - Kin Lane Curated APi
+  - Kin Lane Project API
   created: "2016-04-04"
   modified: "2016-04-04"
   url: ""
   specificationVersion: "0.14"
   apis:
-  - name: Kin Lane Curated
-    description: <p>As I look through the thousands of tweets, blog posts, and other
-      items I read from across the API space, I curate them as part of my regular
-      research. I put them into each research bucket, and make them availble via each
-      reserch project. You can access via this API, and use in real-time as I curate
-      and manage each week.</p>
+  - name: Kin Lane Project API
+    description: This is my master org.
     image: http://kinlane-productions.s3.amazonaws.com/api-evangelist-site/company/logos/kin.png
-    humanURL: https://kin-lane.github.io/curated/
-    baseURL: https://kin-lane.github.io/curated/
+    humanURL: ""
+    baseURL: ""
     tags:
-    - Kin Lane Curated APi
+    - Kin Lane Project API
     properties:
     - type: x-openapi-spec
       url: api-commons/openapi-spec.json
@@ -74,7 +71,7 @@
     url: api-commons/api-plan.json
   include:
   - name: Parent
-    url: https://kin-lane.github.io/curated//apis.yaml
+    url: https://kin-lane.github.io/project//apis.yaml
   maintainers:
   - FN: Kin Lane
     x-twitter: apievangelist
