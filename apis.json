@@ -1,4 +1,4 @@
-[{
+{
 	"name": "Kin Lane Project API",
 	"description": "Each of my websites, and API research projects run as individual projects. I am currently pushing forward over 200 seprate projects, which range from API design, to US government open data. I use this project API to allow me to organize project details, and publish the results to Github repos, white papers, and other destinations. This API provides me a single window to work with all my API projects, and the content, code, and data that go into them.",
 	"image": "https://s3.amazonaws.com/kinlane-productions/bw-icons/bw-project.png",
@@ -6,7 +6,7 @@
 	"tags": ["Kin Lane Project API"],
 	"created": "2016-04-04",
 	"modified": "2016-04-04",
-	"url": "https://kin-lane.github.io/project/"
+	"url": "https://kin-lane.github.io/project/",
 	"specificationVersion": "0.14",
 	"apis": [{
 		"name": "Kin Lane Project API",
@@ -117,4 +117,4 @@
 		"x-twitter": "apievangelist",
 		"email": "info@apievangelist.com"
 	}]
-}]
+}
