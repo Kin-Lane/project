@@ -1,0 +1,32 @@
+[{
+	"project_id": "fXuR7R6TBJ9wEbOcGJ9N8lEnf116shWIeRPrkQf123psa6g117",
+	"title": "3Scale Footer",
+	"summary": "",
+	"github_repo": "",
+	"github_user": null,
+	"subdomain": "",
+	"type": "",
+	"image": "",
+	"image_width": "150",
+	"tag_exclude": null,
+	"footer": "1",
+	"footer_title": "Empowered By 3Scale",
+	"footer_image": "https://s3.amazonaws.com/kinlane-productions/api-service-providers/3Scale/empowered-by-3scale.png",
+	"footer_url": "http://apis.how/ake3nxbapm"
+},
+{
+	"project_id": "CPYUZHThzEUOhzSLsXVZB3ulg4ao123oTBhHi3UfxGOXw117",
+	"title": "Restlet Advertising",
+	"summary": "",
+	"github_repo": "",
+	"github_user": null,
+	"subdomain": "",
+	"type": "Partners",
+	"image": "",
+	"image_width": "150",
+	"tag_exclude": null,
+	"footer": "1",
+	"footer_title": "Empowered by Restlet",
+	"footer_image": "https://s3.amazonaws.com/kinlane-productions/api-evangelist/restlet/supported-by-restlet.png",
+	"footer_url": "http://apis.how/fwqkqrs5ue"
+}]
