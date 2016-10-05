@@ -1,19 +1,18 @@
-
 [{
 	"project_id": "q20ka3koL9x4116O6ZufEtT123wR3pnEhkj4yPGkOhjvxVo117",
 	"title": "Bots",
 	"summary": "",
 	"github_repo": "bots",
 	"github_user": "api-evangelist",
-	"subdomain": "http:\/\/bots.apievangelist.com",
+	"subdomain": "http:/bots.apievangelist.com",
 	"type": "Core Research",
-	"image": "https:\/\/s3.amazonaws.com\/kinlane-productions\/bw-icons\/bw-robots.jpeg",
+	"image": "https:/s3.amazonaws.com/kinlane-productions/bw-icons/bw-robots.jpeg",
 	"image_width": "150",
 	"tag_exclude": null,
 	"feature": "1",
 	"feature_title": "Bot Research",
-	"feature_image": "https:\/\/s3.amazonaws.com\/kinlane-productions\/whitepapers\/report-images\/bot-research-cover.png",
-	"feature_url": "http:\/\/apis.how\/yyqjafh1iw"
+	"feature_image": "https:/s3.amazonaws.com/kinlane-productions/whitepapers/report-images/bot-research-cover.png",
+	"feature_url": "http:/apis.how/yyqjafh1iw"
 },
 {
 	"project_id": "2M8fqCOHCBOnUpouoxTQGhpwpyL6lK7RK6hojmi123Ifs117",
@@ -21,63 +20,63 @@
 	"summary": null,
 	"github_repo": "definitions",
 	"github_user": "api-evangelist",
-	"subdomain": "http:\/\/definitions.apievangelist.com",
+	"subdomain": "http:/definitions.apievangelist.com",
 	"type": "Core Research",
-	"image": "https:\/\/s3.amazonaws.com\/kinlane-productions\/bw-icons\/bw-api-definitions.png",
+	"image": "https:/s3.amazonaws.com/kinlane-productions/bw-icons/bw-api-definitions.png",
 	"image_width": "150",
 	"tag_exclude": "API Design, Github,API-Design,Forms, GitHub,Swagger-Github-Search",
 	"feature": "1",
 	"feature_title": "API Definitions",
-	"feature_image": "https:\/\/s3.amazonaws.com\/kinlane-productions\/whitepapers\/definitions\/api-evangelist-api-definitions-guide-may-2016-cover.png",
-	"feature_url": "http:\/\/apis.how\/cq1qdibpcl"
+	"feature_image": "https:/s3.amazonaws.com/kinlane-productions/whitepapers/definitions/api-evangelist-api-definitions-guide-may-2016-cover.png",
+	"feature_url": "http:/apis.how/cq1qdibpcl"
 },
 {
 	"project_id": "Q34BUiBhvyiPgFfiA587G1167hx0ISsp8aI123B0e42123ICE117",
 	"title": "Deployment",
-	"summary": "<p>A toolkit where I gather all the news, analysis, companies and technology when it comes to deploying APIs.<\/p>",
+	"summary": "<p>A toolkit where I gather all the news, analysis, companies and technology when it comes to deploying APIs.</p>",
 	"github_repo": "deployment",
 	"github_user": "api-evangelist",
-	"subdomain": "http:\/\/deployment.apievangelist.com",
+	"subdomain": "http:/deployment.apievangelist.com",
 	"type": "Core Research",
-	"image": "https:\/\/s3.amazonaws.com\/kinlane-productions\/api-evangelist\/services\/api-deploy.jpg",
+	"image": "https:/s3.amazonaws.com/kinlane-productions/api-evangelist/services/api-deploy.jpg",
 	"image_width": "100",
 	"tag_exclude": "",
 	"feature": "1",
 	"feature_title": "API Deployment Guide",
-	"feature_image": "https:\/\/s3.amazonaws.com\/kinlane-productions\/whitepapers\/deployment\/api-evangelist-api-deployment-guide-may-2016-cover.png",
-	"feature_url": "http:\/\/apis.how\/luztdufwj0"
+	"feature_image": "https:/s3.amazonaws.com/kinlane-productions/whitepapers/deployment/api-evangelist-api-deployment-guide-may-2016-cover.png",
+	"feature_url": "http:/apis.how/luztdufwj0"
 },
 {
 	"project_id": "u9oQUW9Wsoq5116wIsoX6AKq9116M116I0ubh19KsGoTz1d2U117",
 	"title": "Design",
-	"summary": "<p>A toolkit where I gather all the news, analysis, companies and technology when it comes to designing APIs.<\/p>",
+	"summary": "<p>A toolkit where I gather all the news, analysis, companies and technology when it comes to designing APIs.</p>",
 	"github_repo": "design",
 	"github_user": "api-evangelist",
-	"subdomain": "http:\/\/design.apievangelist.com",
+	"subdomain": "http:/design.apievangelist.com",
 	"type": "Core Research",
-	"image": "https:\/\/s3.amazonaws.com\/kinlane-productions\/api-evangelist\/services\/api-design.png",
+	"image": "https:/s3.amazonaws.com/kinlane-productions/api-evangelist/services/api-design.png",
 	"image_width": "100",
 	"tag_exclude": null,
 	"feature": "1",
 	"feature_title": "API Design Guide",
-	"feature_image": "https:\/\/s3.amazonaws.com\/kinlane-productions\/whitepapers\/design\/api-evangelist-api-design-guide-may-2016-cover.png",
-	"feature_url": "http:\/\/apis.how\/jxcvi8wng2"
+	"feature_image": "https:/s3.amazonaws.com/kinlane-productions/whitepapers/design/api-evangelist-api-design-guide-may-2016-cover.png",
+	"feature_url": "http:/apis.how/jxcvi8wng2"
 },
 {
 	"project_id": "Jtig2rp123DZ3VGfFL123U2AJOW2smkXyaQapbS8nY9aw10117",
 	"title": "Management",
-	"summary": "<p>A toolkit where I gather all the news, analysis, companies and technology when it comes to managing APIs.<\/p>",
+	"summary": "<p>A toolkit where I gather all the news, analysis, companies and technology when it comes to managing APIs.</p>",
 	"github_repo": "management",
 	"github_user": "api-evangelist",
-	"subdomain": "http:\/\/management.apievangelist.com\/",
+	"subdomain": "http:/management.apievangelist.com/",
 	"type": "Core Research",
-	"image": "https:\/\/s3.amazonaws.com\/kinlane-productions\/api-evangelist\/services\/api-management.png",
+	"image": "https:/s3.amazonaws.com/kinlane-productions/api-evangelist/services/api-management.png",
 	"image_width": "100",
 	"tag_exclude": null,
 	"feature": "1",
 	"feature_title": "API Management",
-	"feature_image": "https:\/\/s3.amazonaws.com\/kinlane-productions\/whitepapers\/management\/api-evangelist-api-management-guide-may-2016-cover.png",
-	"feature_url": "http:\/\/apis.how\/vca1hwjyuk"
+	"feature_image": "https:/s3.amazonaws.com/kinlane-productions/whitepapers/management/api-evangelist-api-management-guide-may-2016-cover.png",
+	"feature_url": "http:/apis.how/vca1hwjyuk"
 },
 {
 	"project_id": "QmBMIRRt9R8123ljyooQ3te1bho123oBh9sJ45Hw1116jpBck117",
@@ -92,6 +91,6 @@
 	"tag_exclude": null,
 	"feature": "1",
 	"feature_title": "The Pricing & Plans For 250 API Platforms",
-	"feature_image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/blog\/api-evangelist-250-pricing-and-plan-pages.png",
-	"feature_url": "http:\/\/apis.how\/akb0jbkaph"
+	"feature_image": "http:/kinlane-productions.s3.amazonaws.com/api-evangelist-site/blog/api-evangelist-250-pricing-and-plan-pages.png",
+	"feature_url": "http:/apis.how/akb0jbkaph"
 }]
